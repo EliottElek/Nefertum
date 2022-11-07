@@ -11,7 +11,7 @@ api = Api(app)
 
 class Data(Resource):
     def get(self):
-        data = pd.read_csv('data.csv')  # read CSV
+        data = pd.read_csv('query-result.csv')  # read CSV
         data = data.to_dict()  # convert dataframe to dictionary
         return {'data': data}, 200  # return data and 200 OK code
     

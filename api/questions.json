@@ -1,0 +1,27 @@
+[
+  {
+    "attribute": "isAcid",
+    "label": "Is your smell acid ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "foundInWoods",
+    "label": "Can your smell be found in the woods ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "foundInDeserts",
+    "label": "Can your smell be found in a desert ?",
+    "imageSupport": "https://whc.unesco.org/uploads/thumbs/site_1505_0011-1200-630-20160616154958.jpg"
+  },
+  {
+    "attribute": "isFromFood",
+    "label": "Is your smell coming from food ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "smellsGood",
+    "label": "Would you say that your smell is nice ?",
+    "imageSupport": null
+  }
+]

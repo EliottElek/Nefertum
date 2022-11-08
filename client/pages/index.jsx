@@ -16,11 +16,13 @@ export default function Home() {
         Play Smell Akinator
       </button>
       <Link href="/data">
-        <a
-          onClick={startGame}
-          className="border p-4 text-center w-full rounded-lg bg-green-600 text-slate-50"
-        >
+        <a className="border p-4 text-center w-full rounded-lg bg-green-600 text-slate-50">
           Get data
+        </a>
+      </Link>
+      <Link href="/questions">
+        <a className="border p-4 text-center w-full rounded-lg bg-green-600 text-slate-50">
+          Get questions
         </a>
       </Link>
     </div>

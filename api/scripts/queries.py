@@ -57,3 +57,17 @@ select  DISTINCT ?word  ?word_label where {
 
 
 """
+
+locationsDataQuery = """
+PREFIX od: <http://data.odeuropa.eu/ontology/>
+PREFIX crm: <http://erlangen-crm.org/current/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+select DISTINCT ?source ?place ?label (COUNT(DISTINCT ?emission) as ?count) where { 
+	?emission od:F3_had_source / crm:P137_exemplifies ?source ;
+                         crm:P7_took_place_at / crm:P137_exemplifies ?place .
+    
+    ?place skos:prefLabel ?label
+    FILTER (lang(?label) = "en")
+} GROUP BY ?source ?place ?label
+
+"""

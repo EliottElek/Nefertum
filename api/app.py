@@ -14,7 +14,8 @@ api = Api(app)
 
 class Data(Resource):
     def get(self):
-        data = pd.read_csv('query-result.csv')  # read CSV
+        data = pd.read_csv('query-results2.csv', sep=',',
+                           header=None)  # read CSV
         data = data.to_dict()
         # list = []
 
@@ -25,6 +26,8 @@ class Data(Resource):
         #     details['source'] = item['source']
 
         #     list.append(details)
+        print(data.values)
+
         return {'data': data}, 200  # return data and 200 OK code
 
 
@@ -65,9 +68,23 @@ class Question(Resource):
         return {'data': list[random_number]}, 200
 
 
+class WriteCSV(Resource):
+    def get(self):
+        write_to_csv([['1', 'IBM'], ['2', 'Cogni'], ['3', 'Toyota'], [
+                     '4', 'tomtom']], ['Index', 'Name'], "output")
+        return {'data': ""}, 200  # return data and 200 OK code
+
+
+def write_to_csv(output, columns, name):
+    df_output = pd.DataFrame(output, columns=columns, dtype=float)
+    df_output.to_csv(name+".csv")
+    df_output.to_json(name+".json")
+
+
 api.add_resource(Data, '/data')
 api.add_resource(Questions, '/questions')
 api.add_resource(Question, '/question')
+api.add_resource(WriteCSV, '/write')
 
 if __name__ == '__main__':
     app.run()  # run our Flask app

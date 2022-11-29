@@ -23,5 +23,40 @@
     "attribute": "smellsGood",
     "label": "Would you say that your smell is nice ?",
     "imageSupport": null
+  },
+  {
+    "attribute": "comesFromNaturalSource",
+    "label": "Does your smell come from a natural source ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "canBeFoundInCafeteria",
+    "label": "Can your smell be found in a cafeteria ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "canBeFoundInToilets",
+    "label": "Can your smell be found in the toilets ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "isSubtle",
+    "label": "Would you say that your smell is subtle ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "canBeUsedToGetHigh",
+    "label": "Can your smell get you high ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "isAnimal",
+    "label": "Is your smell coming from an animal ?",
+    "imageSupport": null
+  },
+  {
+    "attribute": "isPlant",
+    "label": "Is your smell coming from a plant ?",
+    "imageSupport": null
   }
 ]

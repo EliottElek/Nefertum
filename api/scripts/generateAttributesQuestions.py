@@ -1,16 +1,20 @@
+import csv
 import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 import pandas as pd
-from queries import getCountsQuery
+from queries import questionsDataQuery
 
 sparql = SPARQLWrapper(
     "https://data.odeuropa.eu/repositories/odeuropa"
 )
 sparql.setReturnFormat(JSON)
 
-sparql.setQuery(getCountsQuery)
+sparql.setQuery(questionsDataQuery)
+
+attr_list = ["Sources/Attributes", "count"]
+source_list = []
 csv_file = "matrix.csv"
-json_file = "counts.json"
+json_file = "questions.json"
 try:
     with open(json_file, 'w', encoding="UTF8") as file:
         ret = sparql.queryAndConvert()
@@ -23,19 +27,17 @@ try:
 
         tmp = data["results"]["bindings"]
         # Save our changes to JSON file
-        jsonFile = open(json_file, "w+")
 
+        for row in tmp:
+            word = row["word_label"]["value"]
+            question = "Can your smell be considered as " + word + " ?"
+            row["attribute"] = word
+            row["label"] = question
+            row["imageSupport"] = ""
+
+        jsonFile = open(json_file, "w+")
         jsonFile.write(json.dumps(tmp))
         jsonFile.close()
-        df = pd.read_csv(csv_file, index_col="Sources/Attributes")
-        for row in tmp:
-            if row in tmp:
-                source = row["source"]["value"]
-                count = row["count"]["value"]
-                df.loc[source, "count"] = float(count)
-        # Write DataFrame to CSV file
-        df.to_csv(csv_file)
-
 
 except Exception as e:
     print(e)

@@ -1,29 +1,15 @@
-import { router } from "next";
 import Link from "next/link";
 export default function Home() {
-  const startGame = () => {
-    // Do the necessary to start the game
-    // ------------------- //
-    // Redirect to /page
-    router.push("/game");
-  };
   return (
     <div className="flex flex-col max-w-xs">
-      <button
-        onClick={startGame}
-        className="border text-center w-full p-4 rounded-lg bg-green-600 text-slate-50"
-      >
-        Play Smell Akinator
-      </button>
-      <Link href="/data">
-        <a className="border p-4 text-center w-full rounded-lg bg-green-600 text-slate-50">
-          Get data
-        </a>
-      </Link>
-      <Link href="/questions">
-        <a className="border p-4 text-center w-full rounded-lg bg-green-600 text-slate-50">
-          Get questions
-        </a>
+      <Link href="/game">
+        <span
+          className={
+            "border bg-slate-100 rounded-3xl px-6 py-4 text-sm cursor-pointer font-medium"
+          }
+        >
+          Start a game against Nefertum
+        </span>
       </Link>
     </div>
   );

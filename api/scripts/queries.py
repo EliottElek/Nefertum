@@ -14,7 +14,7 @@ select  ?source ?type ?word ?label  ?word_label (COUNT(DISTINCT ?emission) as ?c
     FILTER (lang(?label) = "en")
 } GROUP BY ?source ?type ?word ?word_label ?label
 
-limit 200
+
     """
 
 

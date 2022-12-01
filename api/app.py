@@ -58,9 +58,7 @@ class Answer(Resource):
         # opening file
         with open("answers.json", "r+") as outfile:
             data = json.load(outfile)
-            print(data)
             for row in data:
-                print(row["session_id"])
 
                 if row["session_id"] == session_id:
                     found = True
@@ -84,10 +82,23 @@ class Answer(Resource):
 
 
 class Answers(Resource):
-    def get(self):
-        if "answers" not in session:
-            return {'data': "No answer yet."}, 200
-        return {'data': session['answers']}, 200
+    def get(self, session_id):
+        # Store answer in json file
+        # opening file
+        found = False
+        with open("answers.json", "r") as outfile:
+            data = json.load(outfile)
+            foundRow = []
+            for row in data:
+                if row["session_id"] == session_id:
+                    found = True
+                    foundRow = row
+                else:
+                    found = False
+            if found == False:
+                return {'data': False}, 200
+            else:
+                return {'data': foundRow}, 200
 
 
 class Start(Resource):
@@ -98,7 +109,7 @@ class Start(Resource):
 api.add_resource(Questions, '/questions')
 api.add_resource(Start, '/start')
 api.add_resource(Answer, '/answer/<session_id>')
-api.add_resource(Answers, '/answers')
+api.add_resource(Answers, '/answers/<session_id>')
 
 if __name__ == '__main__':
     app.run()  # run our Flask app

@@ -4,6 +4,8 @@ import Button from "../components/Button";
 import { ResponsesDisplay } from "../data";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import Accordion from "../components/Accordion";
+import { Typography } from "@material-tailwind/react";
 
 const Game = () => {
   const [index, setIndex] = useState(0);
@@ -63,16 +65,26 @@ const Game = () => {
   return (
     <>
       {loading && <Backdrop />}
-      <div className="flex h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
+      <div className="flex flex-col-reverse md:flex-row h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
         {question && question.imageSupport && (
           <img className="max-w-[50%]" src={question.imageSupport} />
         )}
+        <Accordion sessionId={sessionId} question={question} />
         <div className="flex-col flex gap-8">
-          <h4 className="text-slate-300">Question {index + 1}</h4>
-          <h1 className="text-slate-100">{question && question.label}</h1>
+          <Typography variant="paragraph" className="text-gray-50">
+            Question {index + 1}
+          </Typography>
+
+          <Typography variant="h5" className="text-gray-50">
+            {question && question.label}
+          </Typography>
           <div className="flex flex-col gap-4">
             {ResponsesDisplay.map((answer, i) => (
-              <Button onClick={() => answerQuestion(answer)} key={i}>
+              <Button
+                variant="outlined"
+                onClick={() => answerQuestion(answer)}
+                key={i}
+              >
                 {answer.label}
               </Button>
             ))}

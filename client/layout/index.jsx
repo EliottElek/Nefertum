@@ -1,6 +1,16 @@
+import { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
+} from "@material-tailwind/react";
+import ButtonCustom from "../components/Button";
+
 const navigation = [{ name: "Play against Nefertum !", href: "/game" }];
 
 function classNames(...classes) {
@@ -8,18 +18,20 @@ function classNames(...classes) {
 }
 
 export default function Layout({ children }) {
+  const [bg, setBg] = useState("/bg2.jpg");
+
   return (
     <div
       className="min-h-screen w-full bg-cover"
-      style={{ backgroundImage: `url("/bg2.jpg")` }}
+      style={{ backgroundImage: `url("${bg}")` }}
     >
       <Disclosure as="nav" className="bg-transparent sticky top-0 z-10">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex-shrink-0 flex items-center pt-4">
                     <Link href={"/"}>
                       <img
                         className="h-8 w-8 cursor-pointer"
@@ -27,22 +39,30 @@ export default function Layout({ children }) {
                         alt="Your Company"
                       />
                     </Link>
-                  </div>
-                  <div className="hidden md:block">
-                    <div className="ml-10 flex items-baseline space-x-4">
-                      {navigation.map((item) => (
-                        <Link href={item.href} key={item.name}>
-                          <a
-                            className={classNames(
-                              "border bg-slate-100 rounded-3xl px-4",
-                              "px-3 py-2 rounded-md text-sm font-medium"
-                            )}
-                          >
-                            {item.name}
-                          </a>
-                        </Link>
-                      ))}
+                    <div className="hidden md:block">
+                      <div className="ml-10 flex items-baseline space-x-4">
+                        {navigation.map((item) => (
+                          <Link href={item.href} key={item.name}>
+                            <ButtonCustom>{item.name}</ButtonCustom>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
+                  </div>
+                  <div className="pt-5 hidden md:block">
+                    <Menu>
+                      <MenuHandler>
+                        <Button variant="outlined">Theme</Button>
+                      </MenuHandler>
+                      <MenuList>
+                        <MenuItem onClick={() => setBg("/bg.jpg")}>
+                          Background 1
+                        </MenuItem>
+                        <MenuItem onClick={() => setBg("/bg2.jpg")}>
+                          Background 2
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
                   </div>
                 </div>
                 <div className="-mr-2 flex md:hidden">

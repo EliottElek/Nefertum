@@ -1,12 +1,14 @@
 import React from "react";
-
-const Button = (props) => {
+import { Button } from "@material-tailwind/react";
+const ButtonCustom = (props) => {
   return (
-    <button
+    <Button
       {...props}
-      className={["px-4 py-2 border border-blue-400 rounded-lg hover:bg-blue-100"]}
+      className={
+        "px-4  py-3  border-slate-400 rounded-lg focus:outline-none text-gray-200 hover:text-gray-50 hover:border-gray-50"
+      }
     />
   );
 };
 
-export default Button;
+export default ButtonCustom;

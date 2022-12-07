@@ -4089,11 +4089,7 @@
       "type": "uri",
       "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/02n"
     },
-    "label": {
-      "xml:lang": "en",
-      "type": "literal",
-      "value": "(scented) Handkerchief"
-    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Handkerchief" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "Fine" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -4206,6 +4202,69 @@
   {
     "source": {
       "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/105"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/02n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Fine" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/02n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Fine" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/02n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Fine" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
       "value": "http://www.wikidata.org/entity/Q158082"
     },
     "type": {
@@ -4217,6 +4276,27 @@
       "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/02n"
     },
     "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Fine" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://www.wikidata.org/entity/Q158082"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/02n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "Fine" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -5768,11 +5848,7 @@
       "type": "uri",
       "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/04n"
     },
-    "label": {
-      "xml:lang": "en",
-      "type": "literal",
-      "value": "(scented) Handkerchief"
-    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Handkerchief" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "Delicate" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -8268,6 +8344,69 @@
   {
     "source": {
       "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/105"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/05p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Heavy" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "3"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/05p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Heavy" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "3"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/05p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Heavy" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "3"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
       "value": "http://www.wikidata.org/entity/Q158082"
     },
     "type": {
@@ -8279,6 +8418,27 @@
       "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/05p"
     },
     "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Heavy" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "3"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://www.wikidata.org/entity/Q158082"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/05p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "Heavy" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -12625,6 +12785,69 @@
   {
     "source": {
       "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/105"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/11n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Sweet" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "9"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/11n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Sweet" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "9"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/11n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Sweet" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "9"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
       "value": "http://www.wikidata.org/entity/Q158082"
     },
     "type": {
@@ -12636,6 +12859,27 @@
       "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/11n"
     },
     "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Sweet" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "9"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://www.wikidata.org/entity/Q158082"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/11n"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "Sweet" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -19583,6 +19827,69 @@
   {
     "source": {
       "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/105"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/17p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Soft" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/17p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Soft" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/17p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Soft" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
       "value": "http://www.wikidata.org/entity/Q158082"
     },
     "type": {
@@ -19594,6 +19901,27 @@
       "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/17p"
     },
     "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "Soft" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://www.wikidata.org/entity/Q158082"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/hedonic"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-hedonic/17p"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "Soft" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -44998,11 +45326,7 @@
       "type": "uri",
       "value": "http://data.odeuropa.eu/vocabulary/vdi-intensity/4"
     },
-    "label": {
-      "xml:lang": "en",
-      "type": "literal",
-      "value": "(scented) Handkerchief"
-    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Handkerchief" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "strong" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",
@@ -47316,6 +47640,69 @@
   {
     "source": {
       "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/105"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/intensity"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-intensity/4"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "strong" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "2"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/intensity"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-intensity/4"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "strong" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "2"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/olfactory-objects/552"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/intensity"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-intensity/4"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "strong" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "2"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
       "value": "http://www.wikidata.org/entity/Q158082"
     },
     "type": {
@@ -47327,6 +47714,27 @@
       "value": "http://data.odeuropa.eu/vocabulary/vdi-intensity/4"
     },
     "label": { "xml:lang": "en", "type": "literal", "value": "Heliotrope" },
+    "word_label": { "xml:lang": "en", "type": "literal", "value": "strong" },
+    "count": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "2"
+    }
+  },
+  {
+    "source": {
+      "type": "uri",
+      "value": "http://www.wikidata.org/entity/Q158082"
+    },
+    "type": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/attribute-type/intensity"
+    },
+    "word": {
+      "type": "uri",
+      "value": "http://data.odeuropa.eu/vocabulary/vdi-intensity/4"
+    },
+    "label": { "xml:lang": "en", "type": "literal", "value": "Heliotropium" },
     "word_label": { "xml:lang": "en", "type": "literal", "value": "strong" },
     "count": {
       "datatype": "http://www.w3.org/2001/XMLSchema#integer",

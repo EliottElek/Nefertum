@@ -4,14 +4,17 @@ import Button from "../components/Button";
 import { ResponsesDisplay } from "../data";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import Accordion from "../components/Accordion";
+import Acc from "../components/Acc";
 import { Typography } from "@material-tailwind/react";
+import { useAppContext } from "../context";
 
 const Game = () => {
   const [index, setIndex] = useState(0);
   const [question, setQuestion] = useState(null);
-  const [sessionId, setSessionId] = useState(null);
+
+  const { sessionId, setSessionId } = useAppContext();
   const [loading, setLoading] = useState(false);
+
   const answerQuestion = (answer) => {
     setLoading(true);
     setTimeout(async () => {
@@ -38,20 +41,11 @@ const Game = () => {
     }, 400);
   };
   useEffect(() => {
-    const unloadCallback = (event) => {
-      event.preventDefault();
-      event.returnValue = "";
-      return "";
-    };
-
-    window.addEventListener("beforeunload", unloadCallback);
-    return () => window.removeEventListener("beforeunload", unloadCallback);
-  }, []);
-  useEffect(() => {
     const startGame = async () => {
       try {
-        setSessionId(uuidv4());
-        const { data } = await axios.get(`http://localhost:5000/start`);
+        const id = uuidv4();
+        setSessionId(id);
+        const { data } = await axios.get(`http://localhost:5000/start/${id}`);
         setQuestion(data.data);
         setLoading(false);
       } catch (err) {
@@ -69,7 +63,7 @@ const Game = () => {
         {question && question.imageSupport && (
           <img className="max-w-[50%]" src={question.imageSupport} />
         )}
-        <Accordion sessionId={sessionId} question={question} />
+        <Acc sessionId={sessionId} question={question} />
         <div className="flex-col flex gap-8">
           <Typography variant="paragraph" className="text-gray-50">
             Question {index + 1}

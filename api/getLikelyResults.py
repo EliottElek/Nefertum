@@ -1,16 +1,21 @@
+import pandas as pd
 import json
-from random import choice, randrange
 
 
-json_file = "./scripts/data.json"
+def getLikelyResults(session_id, attribute, answer):
+    session_matrix = "./matrixes/" + session_id + ".csv"
+    sources = []
+    matrix = pd.read_csv(session_matrix)
+    if(answer == "No"):
+        matrix.drop(matrix[matrix[attribute] != 0].index, inplace=True)
+    else:
+        matrix.drop(matrix[matrix[attribute] == 0].index, inplace=True)
+    matrix.to_csv(session_matrix)
+    lists = list(matrix[matrix.columns[0]])
+    for item in lists:
+        sources.append({"src": item})
 
+    if (len(matrix) < 50):
+        return {"result": True, "length": len(matrix), "sources": sources}
 
-def getLikelyResults():
-    winners = []
-    with open(json_file, "r") as outfile:
-        data = json.load(outfile)
-        results_length = randrange(1, 10)
-        for i in range(results_length):
-            winners.append(choice(data))
-
-    return winners
+    return {"result": False, "length": len(matrix), "sources": sources}

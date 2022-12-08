@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Logo from "../public/logo.svg";
 import {
   Menu,
   MenuHandler,
@@ -22,12 +23,8 @@ function classNames(...classes) {
 
 export default function Layout({ children }) {
   const router = useRouter();
-
-  const randBg = Math.floor(Math.random() * 6);
   // expected output: 0, 1 or 2
-  const [bg, setBg] = useState(
-    randBg === 0 || randBg === 1 ? "bg.jpg" : `bg${randBg}.jpg`
-  );
+  const [bg, setBg] = useState("bg2.jpg");
   const [openModal, setOpenModal] = useState(false);
   const { sessionId } = useAppContext();
 
@@ -52,9 +49,9 @@ export default function Layout({ children }) {
                   <div className="flex-shrink-0 flex items-center pt-4">
                     <Link href={"/"}>
                       <img
-                        className="h-8 w-8 cursor-pointer"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Nefertum"
+                        className="w-12 h-12 cursor-pointer"
+                        src={"/logo.svg"}
+                        alt="An SVG of an eye"
                       />
                     </Link>
                     <div className="hidden md:block">

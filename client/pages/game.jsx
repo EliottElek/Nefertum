@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import Acc from "../components/Acc";
 import { Typography } from "@material-tailwind/react";
 import { useAppContext } from "../context";
+import Head from "next/head";
 
 const Game = () => {
   const [index, setIndex] = useState(0);
@@ -15,30 +16,28 @@ const Game = () => {
   const { sessionId, setSessionId } = useAppContext();
   const [loading, setLoading] = useState(false);
 
-  const answerQuestion = (answer) => {
+  const answerQuestion = async (answer) => {
     setLoading(true);
-    setTimeout(async () => {
-      try {
-        const { data: questionData } = await axios.post(
-          `http://localhost:5000/answer/${sessionId}`,
-          {
-            data: {
-              question: question,
-              answer: answer,
-            },
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-            },
-          }
-        );
-        setQuestion(questionData.data);
-        setLoading(false);
-        setIndex((prev) => prev + 1);
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-      }
-    }, 400);
+    try {
+      const { data: questionData } = await axios.post(
+        `http://localhost:5000/answer/${sessionId}`,
+        {
+          data: {
+            question: question,
+            answer: answer,
+          },
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      setQuestion(questionData.data);
+      setLoading(false);
+      setIndex((prev) => prev + 1);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
   };
   useEffect(() => {
     const startGame = async () => {
@@ -58,6 +57,13 @@ const Game = () => {
 
   return (
     <>
+      <Head>
+        <title>Nefertum | Play</title>
+        <meta
+          name="description"
+          content="I'm a web developer, who's familiar with all kind of technologies related to web."
+        />
+      </Head>
       {loading && <Backdrop />}
       <div className="flex flex-col-reverse md:flex-row h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
         {question && question.imageSupport && (

@@ -65,7 +65,7 @@ const Game = () => {
         />
       </Head>
       {loading && <Backdrop />}
-      <div className="flex flex-col-reverse md:flex-row h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
+      <div className="flex max-w-[95%] flex-col-reverse md:flex-row h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
         {question && question.imageSupport && (
           <img className="max-w-[50%]" src={question.imageSupport} />
         )}

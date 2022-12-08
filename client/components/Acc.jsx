@@ -57,11 +57,11 @@ export default function Acc({ sessionId, question }) {
   }, [parentRef]);
 
   return (
-    <div className="max-w-2xl self-start !text-gray-50 pr-5 h-full">
+    <div className="self-start !text-gray-50 pr-5 h-full md:max-w-2xl w-full">
       <Fragment>
         <Accordion
           animate={customAnimation}
-          className="text-gray-50"
+          className="text-gray-50 w-full"
           open={open === 1}
         >
           <AccordionHeader
@@ -102,8 +102,8 @@ export default function Acc({ sessionId, question }) {
               "No results yet for this session."
             ) : (
               <ul>
-                {results?.sources?.map((result) => (
-                  <li>{result.label}</li>
+                {results?.sources?.map((result, i) => (
+                  <li key={i}>{result.label}</li>
                 ))}
               </ul>
             )}
@@ -122,9 +122,9 @@ export default function Acc({ sessionId, question }) {
         From our calculations, you smell would be...
         <Typography variant="h6" className="pt-5">
           <ul>
-            {results?.sources?.map((result) => (
+            {results?.sources?.map((result, i) => (
               <li>
-                <li>{result.label}</li>
+                <li key={i}>{result.label}</li>
               </li>
             ))}
           </ul>

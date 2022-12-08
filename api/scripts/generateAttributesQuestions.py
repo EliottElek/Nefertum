@@ -2,7 +2,8 @@ import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 import pandas as pd
 from queries import questionsDataQuery
-
+from termcolor import colored
+import os
 sparql = SPARQLWrapper(
     "https://data.odeuropa.eu/repositories/odeuropa"
 )
@@ -12,8 +13,11 @@ sparql.setQuery(questionsDataQuery)
 
 attr_list = ["Sources/Attributes", "count"]
 source_list = []
-csv_file = "matrix.csv"
-json_file = "questions.json"
+path = os.path.join("./", "data")
+csv_file = os.path.join(path, "matrix.csv")
+json_file = os.path.join(path,  "questions.json")
+
+print('Generating questions from attributes...')
 try:
     with open(json_file, 'w', encoding="UTF8") as file:
         ret = sparql.queryAndConvert()
@@ -37,6 +41,9 @@ try:
         jsonFile = open(json_file, "w+")
         jsonFile.write(json.dumps(tmp))
         jsonFile.close()
+        print(colored('Attributes questions generated with success.✅', 'green'))
+
 
 except Exception as e:
+    print(colored('An error occured while gererating attributes questions.', 'red'))
     print(e)

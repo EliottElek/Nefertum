@@ -103,11 +103,7 @@ export default function Acc({ sessionId, question }) {
             ) : (
               <ul>
                 {results?.sources?.map((result) => (
-                  <li>
-                    <a className="hover:underline" href={result.src}>
-                      {result.src}
-                    </a>
-                  </li>
+                  <li>{result.label}</li>
                 ))}
               </ul>
             )}
@@ -128,9 +124,7 @@ export default function Acc({ sessionId, question }) {
           <ul>
             {results?.sources?.map((result) => (
               <li>
-                <a className="hover:underline" href={result.src}>
-                  {result.src}
-                </a>
+                <li>{result.label}</li>
               </li>
             ))}
           </ul>

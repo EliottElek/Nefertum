@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "flask run",
-    "generate_matrix": "python3 ./scripts/fetcher.py ./scripts/addCounts.py",
+    "generate_matrix": "python3 ./scripts/fetcher.py && python3 ./scripts/addCountsLabels.py",
     "generate_questions": "python3 ./scripts/generateAttributesQuestions.py"
   }
 }

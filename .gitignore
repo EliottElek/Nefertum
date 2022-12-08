@@ -6,6 +6,14 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 /node_modules/
+# exclude everything
+/api/data/*
+/api/matrix/*
+
+# exception to the rule
+!/api/data/.gitkeep
+!/api/matrix/.gitkeep
+
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

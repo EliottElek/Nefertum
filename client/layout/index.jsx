@@ -2,24 +2,39 @@ import { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Logo from "../public/logo.svg";
 import {
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
   Button,
+  Typography,
 } from "@material-tailwind/react";
 import ButtonCustom from "../components/Button";
-
-const navigation = [{ name: "Play against Nefertum !", href: "/game" }];
+import CustomModal from "../components/Modal";
+import { useAppContext } from "../context";
+import { useRouter } from "next/router";
+const navigation = [{ name: "New game", href: "/game" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Layout({ children }) {
-  const [bg, setBg] = useState("/bg2.jpg");
+  const router = useRouter();
+  // expected output: 0, 1 or 2
+  const [bg, setBg] = useState("bg2.jpg");
+  const [openModal, setOpenModal] = useState(false);
+  const { sessionId } = useAppContext();
 
+  const newGame = () => {
+    if (!sessionId) {
+      router.push("/game");
+      return;
+    }
+    setOpenModal(true);
+  };
   return (
     <div
       className="min-h-screen w-full bg-cover"
@@ -34,33 +49,33 @@ export default function Layout({ children }) {
                   <div className="flex-shrink-0 flex items-center pt-4">
                     <Link href={"/"}>
                       <img
-                        className="h-8 w-8 cursor-pointer"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
+                        className="w-12 h-12 cursor-pointer"
+                        src={"/logo.svg"}
+                        alt="An SVG of an eye"
                       />
                     </Link>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
-                          <Link href={item.href} key={item.name}>
-                            <ButtonCustom>{item.name}</ButtonCustom>
-                          </Link>
-                        ))}
+                        <ButtonCustom onClick={newGame}>
+                          New game !
+                        </ButtonCustom>
                       </div>
                     </div>
                   </div>
                   <div className="pt-5 hidden md:block">
                     <Menu>
                       <MenuHandler>
-                        <Button variant="outlined">Theme</Button>
+                        <Button color="purple">Theme</Button>
                       </MenuHandler>
                       <MenuList>
-                        <MenuItem onClick={() => setBg("/bg.jpg")}>
-                          Background 1
-                        </MenuItem>
-                        <MenuItem onClick={() => setBg("/bg2.jpg")}>
-                          Background 2
-                        </MenuItem>
+                        {["", "2", "3", "4", "5", "6"].map((bgItem) => (
+                          <MenuItem onClick={() => setBg(`/bg${bgItem}.jpg`)}>
+                            <img
+                              src={`/bg${bgItem}.jpg`}
+                              className="h-14 w-full object-cover"
+                            />
+                          </MenuItem>
+                        ))}
                       </MenuList>
                     </Menu>
                   </div>
@@ -104,6 +119,21 @@ export default function Layout({ children }) {
       <main className="mx-auto w-full min-h-[80vh]  justify-center max-w-7xl py-6 sm:px-6 lg:px-8 flex flex-col items-center">
         {children}
       </main>
+      <CustomModal
+        open={openModal}
+        setOpen={setOpenModal}
+        title={"Your progress will be lost."}
+        onSubmit={() => window.location.reload()}
+        submitBtnLabel={"Start a new game"}
+        cancelBtnLabel={"Finish this game"}
+        onCancel={() => {}}
+      >
+        If you start a new game against Nefertum, all your progress for this
+        session will be lost. (session id : {sessionId})<br />
+        <Typography variant="h6" className="pt-5">
+          Are you sure you want to continue ?
+        </Typography>
+      </CustomModal>
     </div>
   );
 }

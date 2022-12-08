@@ -5,6 +5,7 @@ import pandas as pd
 import json
 import random
 from getLikelyResults import getLikelyResults
+import shutil
 
 
 app = Flask(__name__)
@@ -103,17 +104,40 @@ class Answers(Resource):
 
 
 class Start(Resource):
-    def get(self):
+    def get(self, session_id):
+        # We create a copy of matrix.csv called <session_id>.csv
+        src_path = "./scripts/matrix.csv"
+        dst_path = "./matrixes/" + session_id + ".csv"
+        shutil.copy(src_path, dst_path)
         return {'data': getNextQuestion()}, 200
 
 
 class LikelyResults(Resource):
     def get(self, session_id):
-        return {'data': getLikelyResults()}, 200
+        # Get latest answer from session ID
+        # opening file
+        found = False
+        with open("answers.json", "r") as outfile:
+            data = json.load(outfile)
+            foundRow = []
+            for row in data:
+                if row["session_id"] == session_id:
+                    found = True
+                    foundRow = row
+                else:
+                    found = False
+            if found == False:
+                return False
+            else:
+                latest_answer = foundRow["answers"][len(foundRow["answers"])-1]
+                attribute = latest_answer["question"]["attribute"]
+                answer = latest_answer["answer"]["label"]
+
+        return {'data': getLikelyResults(session_id, attribute, answer)}, 200
 
 
 api.add_resource(Questions, '/questions')
-api.add_resource(Start, '/start')
+api.add_resource(Start, '/start/<session_id>')
 api.add_resource(Answer, '/answer/<session_id>')
 api.add_resource(Answers, '/answers/<session_id>')
 api.add_resource(LikelyResults, '/likely_results/<session_id>')

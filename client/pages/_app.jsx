@@ -1,14 +1,17 @@
 import Layout from "../layout";
 import "../styles/globals.css";
 import { ThemeProvider } from "@material-tailwind/react";
+import { AppWrapper } from "../context";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <AppWrapper>
+      <ThemeProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </AppWrapper>
   );
 }
 

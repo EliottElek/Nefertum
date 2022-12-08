@@ -1,4 +1,3 @@
-import csv
 import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 import pandas as pd

@@ -11,9 +11,9 @@ def getLikelyResults(session_id, attribute, answer):
     else:
         matrix.drop(matrix[matrix[attribute] == 0].index, inplace=True)
     matrix.to_csv(session_matrix)
-    lists = list(matrix[matrix.columns[0]])
+    lists = list(matrix[matrix.columns[1]])
     for item in lists:
-        sources.append({"src": item})
+        sources.append({"label": item})
 
     if (len(matrix) < 10):
         return {"result": True, "length": len(matrix), "sources": sources}

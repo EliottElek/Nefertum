@@ -2,7 +2,9 @@ mainQuery = """
 PREFIX od: <http://data.odeuropa.eu/ontology/>
 PREFIX crm: <http://erlangen-crm.org/current/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-select  ?source ?type ?word ?label  ?word_label (COUNT(DISTINCT ?emission) as ?count) where {
+select  ?source ?type ?word ?label  ?word_label (COUNT(DISTINCT ?emission) as ?count)
+FROM <http://www.ontotext.com/disable-sameAs>
+ where {
 	?emission od:F3_had_source / crm:P137_exemplifies ?source ;
                       od:F1_generated ?smell .
     ?assignment crm:P140_assigned_attribute_to ?smell ;

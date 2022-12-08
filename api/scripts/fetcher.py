@@ -3,18 +3,23 @@ import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 import pandas as pd
 from queries import mainQuery
+import os
+from termcolor import colored
 
 sparql = SPARQLWrapper(
-    "https://data.odeuropa.eu/repositories/odeuropa"
+    "https://data.odeuropa.eu/repositories/odeuropa", "?sameAs=false"
 )
 sparql.setReturnFormat(JSON)
 
 sparql.setQuery(mainQuery)
 
-attr_list = ["Sources/Attributes", "count"]
+attr_list = ["Sources/Attributes", "label", "count"]
 source_list = []
-csv_file = "matrix.csv"
-json_file = "data.json"
+
+path = os.path.join("./", "data")
+csv_file = os.path.join(path, "matrix.csv")
+json_file = os.path.join(path,  "data.json")
+print('Generating matrix from odeuropa endpoint...')
 try:
     with open(json_file, 'w', encoding="UTF8") as file:
         ret = sparql.queryAndConvert()
@@ -55,7 +60,7 @@ try:
         df = pd.read_csv(csv_file)
         # a Pandas method that fills any NaN value with 0, you can change 0 to any value you
         # want, you can use mean or median, etc
-        #df.replace(r'^\s*$', 0, regex=True)
+        # df.replace(r'^\s*$', 0, regex=True)
         df.fillna(0, inplace=True)
         df.to_csv(csv_file)
         df = pd.read_csv(csv_file, index_col="Sources/Attributes")
@@ -64,10 +69,14 @@ try:
             source = row["source"]["value"]
             count = row["count"]["value"]
             df.loc[source, attribute] = float(count)
-        # Delete unused column 
+        # Delete unused column
         df.drop('Unnamed: 0', inplace=True, axis=1)
         # Write DataFrame to CSV file
         df.to_csv(csv_file)
 
+    print(colored('Matrix generated with success.✅', 'green'))
+
 except Exception as e:
+
+    print(colored('An error occured generating the matrix.', 'red'))
     print(e)

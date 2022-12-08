@@ -4,7 +4,7 @@ from flask_restful import Resource, Api, reqparse
 import pandas as pd
 import json
 import random
-from getLikelyResults import getLikelyResults
+from scripts.getLikelyResults import getLikelyResults
 import shutil
 
 

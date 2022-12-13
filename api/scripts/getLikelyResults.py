@@ -16,6 +16,6 @@ def getLikelyResults(session_id, attribute, answer):
         sources.append({"label": item})
 
     if (len(matrix) < 10):
-        return {"result": True, "length": len(matrix), "sources": sources}
+        return {"result": True, "length": type(len(matrix)), "sources": sources[0: 10]}
 
-    return {"result": False, "length": len(matrix), "sources": sources}
+    return {"result": False, "length": len(matrix), "sources": sources[0: 10]}

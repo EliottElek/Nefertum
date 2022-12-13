@@ -57,15 +57,15 @@ export default function Acc({ sessionId, question }) {
   }, [parentRef]);
 
   return (
-    <div className="self-start !text-gray-50 pr-5 h-full md:max-w-2xl w-full">
+    <div className="self-start !text-gray-50 pr-5 h-full md:max-w-xs w-full">
       <Fragment>
         <Accordion
           animate={customAnimation}
-          className="text-gray-50 w-full"
+          className="text-gray-50"
           open={open === 1}
         >
           <AccordionHeader
-            className="text-gray-50 hover:text-gray-200 pr-5"
+            className="text-gray-50 hover:text-gray-200"
             onClick={() => handleOpen(1)}
           >
             Your previous answers {answers && `(${answers?.length})`}
@@ -105,6 +105,7 @@ export default function Acc({ sessionId, question }) {
                 {results?.sources?.map((result, i) => (
                   <li key={i}>{result.label}</li>
                 ))}
+                <li>+ {results.length - 10} more results</li>
               </ul>
             )}
           </AccordionBody>

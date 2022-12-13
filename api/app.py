@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import json
 import random
-from getLikelyResults import getLikelyResults
+from scripts.getLikelyResults import getLikelyResults
 import shutil
 
 
@@ -18,7 +18,7 @@ app.config['SECRET_KEY'] = 'oh_so_secret'
 
 class Questions(Resource):
     def get(self):
-        input_file = open('./scripts/questions.json')
+        input_file = open('./data/questions.json')
         json_array = json.load(input_file)
         # data = pd.read_json('questions.json')  # read JSON
         list = []
@@ -37,7 +37,7 @@ class Questions(Resource):
 def getNextQuestion(session_id):
 
     ########    CURRENT WAY OF CHOOSING NEXT QUESTION (RANDOMLY)     ########
-    input_file = open('./scripts/questions.json')
+    input_file = open('./data/questions.json')
     json_array = json.load(input_file)
     list = []
 
@@ -61,7 +61,7 @@ class Answer(Resource):
         body = request.json["data"]
         found = True
         # opening file
-        with open("answers.json", "r+") as outfile:
+        with open("./data/answers.json", "r+") as outfile:
             data = json.load(outfile)
             for row in data:
                 if row["session_id"] == session_id:
@@ -78,14 +78,13 @@ class Answer(Resource):
                 }
                 data.append(new_row)
             
-        with open("answers.json", "w") as jsonFile:
+        with open("./data/answers.json", "w") as jsonFile:
             json.dump(data, jsonFile)
 
         # Compute the next question to send
             attribute = body["question"]["attribute"]
             answer = body["answer"]["label"]
-        print('question', getLikelyResults(session_id, attribute, answer)["question"])
-        return {'data': getLikelyResults(session_id, attribute, answer)["question"]}, 200
+        return {'data': getLikelyResults(session_id, attribute, answer)}, 200
 
 
 class Answers(Resource):
@@ -111,7 +110,7 @@ class Answers(Resource):
 class Start(Resource):
     def get(self, session_id):
         # We create a copy of matrix.csv called <session_id>.csv
-        src_path = "./scripts/matrix.csv"
+        src_path = "./data/matrix.csv"
         dst_path = "./matrixes/" + session_id + ".csv"
         shutil.copy(src_path, dst_path)
         

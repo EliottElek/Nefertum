@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 
+
 def getLikelyResults(session_id, attribute, answer):
     session_matrix = "./matrixes/" + session_id + ".csv"
     sources = []
@@ -14,9 +15,10 @@ def getLikelyResults(session_id, attribute, answer):
     matrix.to_csv(session_matrix)
 
     ########    FINDING MOST DISCRIMINANT QUESTION (RESULTS IN CONSOLE)     ########
-    
+
     nMatrix = matrix.to_numpy()
-    scores = np.empty(len(nMatrix[0]), dtype=[('columnIndex', int), ('score', float)])
+    scores = np.empty(len(nMatrix[0]), dtype=[
+                      ('columnIndex', int), ('score', float)])
     for j in range(len(nMatrix[0])):
         col = nMatrix[:, j]
         count = 0
@@ -31,14 +33,14 @@ def getLikelyResults(session_id, attribute, answer):
     qBases = ["Can your smell be defined as "]
     # qBases = ["Can your smell be defined as ", "Would you qualify your smell as ", "Is your smell "]
 
-    nextQuestion = {"attribute": matrix.columns[int(results[0][0])], "label": qBases[0] + matrix.columns[int(results[0][0])] + "?"}
+    nextQuestion = {"attribute": matrix.columns[int(
+        results[0][0])], "label": qBases[0] + matrix.columns[int(results[0][0])] + "?"}
 
-    lists = matrix['Sources/Attributes'].tolist()
+    lists = matrix['label'].tolist()
     for item in lists:
-        sources.append({"src": item})
+        sources.append({"label": item})
 
     if (len(matrix) < 10):
-        return {"result": True, "length": len(matrix), "sources": sources, "question": nextQuestion}
+        return {"result": True, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}
 
-    print('oui', nextQuestion)
-    return {"result": False, "length": len(matrix), "sources": sources, "question": nextQuestion}
+    return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}

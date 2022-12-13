@@ -1,7 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, session
 from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
 import pandas as pd
+import numpy as np
 import json
 import random
 from scripts.getLikelyResults import getLikelyResults
@@ -33,7 +34,9 @@ class Questions(Resource):
         return {'data': list}, 200  # return data and 200 OK code
 
 
-def getNextQuestion():
+def getNextQuestion(session_id):
+
+    ########    CURRENT WAY OF CHOOSING NEXT QUESTION (RANDOMLY)     ########
     input_file = open('./data/questions.json')
     json_array = json.load(input_file)
     list = []
@@ -61,7 +64,6 @@ class Answer(Resource):
         with open("./data/answers.json", "r+") as outfile:
             data = json.load(outfile)
             for row in data:
-
                 if row["session_id"] == session_id:
                     found = True
                     list = row["answers"]
@@ -75,12 +77,14 @@ class Answer(Resource):
                     "answers": [body]
                 }
                 data.append(new_row)
+            
         with open("./data/answers.json", "w") as jsonFile:
             json.dump(data, jsonFile)
 
         # Compute the next question to send
-
-        return {'data': getNextQuestion()}, 200
+            attribute = body["question"]["attribute"]
+            answer = body["answer"]["label"]
+        return {'data': getLikelyResults(session_id, attribute, answer)}, 200
 
 
 class Answers(Resource):
@@ -88,11 +92,11 @@ class Answers(Resource):
         # Store answer in json file
         # opening file
         found = False
-        with open("./data/answers.json", "r") as outfile:
+        with open("answers.json", "r") as outfile:
             data = json.load(outfile)
             foundRow = []
             for row in data:
-                if row["session_id"] == session_id:
+                if row["session_id"] == session_id: 
                     found = True
                     foundRow = row
                 else:
@@ -109,7 +113,8 @@ class Start(Resource):
         src_path = "./data/matrix.csv"
         dst_path = "./matrixes/" + session_id + ".csv"
         shutil.copy(src_path, dst_path)
-        return {'data': getNextQuestion()}, 200
+        
+        return {'data': getNextQuestion(session_id)}, 200
 
 
 class LikelyResults(Resource):
@@ -117,7 +122,7 @@ class LikelyResults(Resource):
         # Get latest answer from session ID
         # opening file
         found = False
-        with open("./data/answers.json", "r") as outfile:
+        with open("answers.json", "r") as outfile:
             data = json.load(outfile)
             foundRow = []
             for row in data:

@@ -59,10 +59,7 @@ const Game = () => {
     <>
       <Head>
         <title>Nefertum | Play</title>
-        <meta
-          name="description"
-          content="I'm a web developer, who's familiar with all kind of technologies related to web."
-        />
+        <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
       {loading && <Backdrop />}
       <div className="flex max-w-[95%] flex-col-reverse md:flex-row h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">

@@ -24,7 +24,7 @@ function classNames(...classes) {
 export default function Layout({ children }) {
   const router = useRouter();
   // expected output: 0, 1 or 2
-  const [bg, setBg] = useState("bg2.jpg");
+  const [bg, setBg] = useState("bg7.jpg");
   const [openModal, setOpenModal] = useState(false);
   const { sessionId } = useAppContext();
 
@@ -68,7 +68,7 @@ export default function Layout({ children }) {
                         <Button color="purple">Theme</Button>
                       </MenuHandler>
                       <MenuList>
-                        {["", "2", "3", "4", "5", "6"].map((bgItem) => (
+                        {["", "2", "3", "4", "5", "6", "7"].map((bgItem) => (
                           <MenuItem onClick={() => setBg(`/bg${bgItem}.jpg`)}>
                             <img
                               src={`/bg${bgItem}.jpg`}
@@ -82,7 +82,7 @@ export default function Layout({ children }) {
                 </div>
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-200 p-2 text-gray-800 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg p-2 text-gray-800 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -94,20 +94,18 @@ export default function Layout({ children }) {
               </div>
             </div>
 
-            <Disclosure.Panel className="md:hidden">
+            <Disclosure.Panel className="md:hidden bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
               <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className={classNames(
-                      "text-gray-800 hover:bg-gray-300 hover:text-white",
-                      "block px-3 py-2 rounded-md text-base font-medium"
-                    )}
                     aria-current={item.current ? "page" : undefined}
                   >
-                    {item.name}
+                    <ButtonCustom style={{ width: "100%", marginTop: "12px" }}>
+                      {item.name}
+                    </ButtonCustom>
                   </Disclosure.Button>
                 ))}
               </div>

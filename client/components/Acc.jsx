@@ -7,15 +7,15 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import CustomModal from "./Modal";
-export default function Acc({ sessionId, question }) {
+export default function Acc({ sessionId, question, results }) {
   const [open, setOpen] = useState(1);
   const [openModal, setOpenModal] = useState(false);
 
+  console.log(results);
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
   const [answers, setAnswers] = useState(null);
-  const [results, setResults] = useState(null);
 
   const parentRef = useRef();
 
@@ -32,19 +32,10 @@ export default function Acc({ sessionId, question }) {
   }, [setAnswers, sessionId, question]);
 
   useEffect(() => {
-    const loadResults = async () => {
-      try {
-        const { data: res } = await axios.get(
-          `http://localhost:5000/likely_results/${sessionId}`
-        );
-        if (res.data.result === true) setOpenModal(true);
-        setResults(res.data);
-        console.log(res.data);
-      } catch (err) {}
-    };
-    if (answers && sessionId && question) loadResults();
-  }, [setResults, answers, sessionId, question]);
-
+    if (results?.result === true) {
+      setOpenModal(true);
+    }
+  }, [results?.result, setOpen]);
   const customAnimation = {
     mount: { scale: 1 },
     unmount: { scale: 0.9 },
@@ -86,11 +77,7 @@ export default function Acc({ sessionId, question }) {
           </AccordionBody>
         </Accordion>
 
-        <Accordion
-          disabled={results?.result}
-          open={open === 2}
-          animate={customAnimation}
-        >
+        <Accordion open={open === 2} animate={customAnimation}>
           <AccordionHeader
             onClick={() => handleOpen(2)}
             className="text-gray-50 hover:text-gray-200"
@@ -105,7 +92,9 @@ export default function Acc({ sessionId, question }) {
                 {results?.sources?.map((result, i) => (
                   <li key={i}>{result.label}</li>
                 ))}
-                <li>+ {results.length - 10} more results</li>
+                <li>
+                  + {results.length - results?.sources.length} more results
+                </li>
               </ul>
             )}
           </AccordionBody>

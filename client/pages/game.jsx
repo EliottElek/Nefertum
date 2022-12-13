@@ -12,6 +12,7 @@ import Head from "next/head";
 const Game = () => {
   const [index, setIndex] = useState(0);
   const [question, setQuestion] = useState(null);
+  const [results, setResults] = useState(null);
 
   const { sessionId, setSessionId } = useAppContext();
   const [loading, setLoading] = useState(false);
@@ -31,7 +32,9 @@ const Game = () => {
           },
         }
       );
-      setQuestion(questionData.data);
+      console.log(questionData);
+      setQuestion(questionData.data.question);
+      setResults(questionData.data);
       setLoading(false);
       setIndex((prev) => prev + 1);
     } catch (err) {
@@ -66,7 +69,7 @@ const Game = () => {
         {question && question.imageSupport && (
           <img className="max-w-[50%]" src={question.imageSupport} />
         )}
-        <Acc sessionId={sessionId} question={question} />
+        <Acc sessionId={sessionId} question={question} results={results} />
         <div className="flex-col flex gap-8">
           <Typography variant="paragraph" className="text-gray-50">
             Question {index + 1}

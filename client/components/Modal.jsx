@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import {
   Button,
   Dialog,
@@ -16,17 +15,20 @@ export default function CustomModal({
   children,
   cancelBtnLabel,
   submitBtnLabel,
+  cancelBtnDisabled,
+  submitBtnDisabled,
 }) {
   const handleOpen = () => setOpen(!open);
   return (
-    <Fragment>
-      <Dialog open={open} handler={handleOpen}>
+    <div className="!max-w-xl w-[90%]">
+      <Dialog open={open} handler={handleOpen} className="!max-w-xl w-[90%]">
         <DialogHeader>{title}</DialogHeader>
         <DialogBody divider className="flex-col">
           {children}
         </DialogBody>
         <DialogFooter>
           <Button
+            disabled={cancelBtnDisabled}
             variant="text"
             color="purple"
             onClick={() => {
@@ -37,11 +39,16 @@ export default function CustomModal({
           >
             <span>{cancelBtnLabel}</span>
           </Button>
-          <Button variant="gradient" color="purple" onClick={onSubmit}>
+          <Button
+            disabled={submitBtnDisabled}
+            variant="gradient"
+            color="purple"
+            onClick={onSubmit}
+          >
             <span>{submitBtnLabel}</span>
           </Button>
         </DialogFooter>
       </Dialog>
-    </Fragment>
+    </div>
   );
 }

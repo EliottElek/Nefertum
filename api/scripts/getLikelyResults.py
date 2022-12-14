@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import json
 
 
 def getLikelyResults(session_id, attribute, answer):
@@ -28,7 +27,6 @@ def getLikelyResults(session_id, attribute, answer):
         score = np.abs(len(nMatrix)/2 - count)
         scores[j] = (j, score)
     results = np.sort(scores, order='score')
-    print('results', results)
 
     qBases = ["Can your smell be defined as "]
     # qBases = ["Can your smell be defined as ", "Would you qualify your smell as ", "Is your smell "]

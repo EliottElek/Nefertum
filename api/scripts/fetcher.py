@@ -7,7 +7,7 @@ import os
 from termcolor import colored
 
 sparql = SPARQLWrapper(
-    "https://data.odeuropa.eu/repositories/odeuropa", "?sameAs=false"
+    "https://data.odeuropa.eu/repositories/odeuropa", "sameAs=false"
 )
 sparql.setReturnFormat(JSON)
 

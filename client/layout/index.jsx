@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
+
 import Link from "next/link";
-import Logo from "../public/logo.svg";
 import {
   Menu,
   MenuHandler,
@@ -16,10 +17,6 @@ import CustomModal from "../components/Modal";
 import { useAppContext } from "../context";
 import { useRouter } from "next/router";
 const navigation = [{ name: "New game", href: "/game" }];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -59,6 +56,11 @@ export default function Layout({ children }) {
                         <ButtonCustom onClick={newGame}>
                           New game !
                         </ButtonCustom>
+                        <Link href="/add-source">
+                          <ButtonCustom variant="outlined">
+                            Add a source
+                          </ButtonCustom>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -96,18 +98,23 @@ export default function Layout({ children }) {
 
             <Disclosure.Panel className="md:hidden bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
               <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-                {navigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    aria-current={item.current ? "page" : undefined}
+                <ButtonCustom style={{ width: "100%", marginTop: "12px" }}>
+                  <span className="flex justify-center items-center gap-2">
+                    New game
+                    <PlusCircleIcon className="w-5 h-5" />
+                  </span>
+                </ButtonCustom>
+                <Link href="/add-source">
+                  <ButtonCustom
+                    variant="outlined"
+                    style={{ width: "100%", marginTop: "12px" }}
                   >
-                    <ButtonCustom style={{ width: "100%", marginTop: "12px" }}>
-                      {item.name}
-                    </ButtonCustom>
-                  </Disclosure.Button>
-                ))}
+                    <span className="flex items-center gap-2  justify-center">
+                      Cannot find a source ? Add it{" "}
+                      <PlusCircleIcon className="w-5 h-5" />
+                    </span>
+                  </ButtonCustom>
+                </Link>
               </div>
             </Disclosure.Panel>
           </>

@@ -7,6 +7,8 @@ module.exports = withMT({
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./layout/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{html,js}",
+    "./node_modules/react-tailwindcss-select/dist/index.esm.js",
   ],
   theme: {
     extend: {},

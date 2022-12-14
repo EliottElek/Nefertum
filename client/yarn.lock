@@ -2595,6 +2595,13 @@ react-merge-refs@v1.1.0:
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
+react-tailwindcss-select@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-tailwindcss-select/-/react-tailwindcss-select-1.6.0.tgz#ae7795cca2fefc63ec0774d7b1c72f1c2195df66"
+  integrity sha512-+1x3C0aQHrK6A4g5sQ6cpUdF459E1xwHMrMgqjy9o0tqYzyvd1vmSdc9ssjbdMnUPEGclUKUygeFy7+blNZ3hQ==
+  dependencies:
+    eslint-plugin-import "^2.26.0"
+
 react@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"

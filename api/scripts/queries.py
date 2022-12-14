@@ -28,6 +28,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 # What smell sources have the highest number of documentation in the past?
 
 SELECT ?source ?label (COUNT(DISTINCT ?experience) as ?count)
+FROM <http://www.ontotext.com/disable-sameAs>
 WHERE {
   ?emission od:F3_had_source / crm:P137_exemplifies ?source;
             od:F1_generated ?smell .
@@ -45,7 +46,10 @@ questionsDataQuery = """
 PREFIX od: <http://data.odeuropa.eu/ontology/>
 PREFIX crm: <http://erlangen-crm.org/current/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-select  DISTINCT ?word  ?word_label where {
+select  DISTINCT ?word  ?word_label 
+FROM <http://www.ontotext.com/disable-sameAs>
+
+WHERE {
 	?emission od:F3_had_source / crm:P137_exemplifies ?source ;
                       od:F1_generated ?smell .
     ?assignment crm:P140_assigned_attribute_to ?smell ;
@@ -64,7 +68,10 @@ locationsDataQuery = """
 PREFIX od: <http://data.odeuropa.eu/ontology/>
 PREFIX crm: <http://erlangen-crm.org/current/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-select DISTINCT ?source ?place ?label (COUNT(DISTINCT ?emission) as ?count) where { 
+select DISTINCT ?source ?place ?label (COUNT(DISTINCT ?emission) as ?count) 
+FROM <http://www.ontotext.com/disable-sameAs>
+
+WHERE { 
 	?emission od:F3_had_source / crm:P137_exemplifies ?source ;
                          crm:P7_took_place_at / crm:P137_exemplifies ?place .
     

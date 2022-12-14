@@ -7,11 +7,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import CustomModal from "./Modal";
+import { useRouter } from "next/router";
 export default function Acc({ sessionId, question, results }) {
   const [open, setOpen] = useState(1);
   const [openModal, setOpenModal] = useState(false);
-
-  console.log(results);
+  const router = useRouter();
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
@@ -106,7 +106,9 @@ export default function Acc({ sessionId, question, results }) {
         title={"We might have a result..."}
         open={openModal}
         setOpen={setOpenModal}
-        onCancel={() => {}}
+        onCancel={() => {
+          router.push("/add-source");
+        }}
         onSubmit={() => {}}
       >
         From our calculations, you smell would be...

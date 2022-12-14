@@ -5,7 +5,7 @@ from queries import questionsDataQuery
 from termcolor import colored
 import os
 sparql = SPARQLWrapper(
-    "https://data.odeuropa.eu/repositories/odeuropa"
+    "https://data.odeuropa.eu/repositories/odeuropa", "sameAs=false"
 )
 sparql.setReturnFormat(JSON)
 

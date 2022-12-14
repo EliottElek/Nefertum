@@ -32,7 +32,6 @@ const Game = () => {
           },
         }
       );
-      console.log(questionData);
       setQuestion(questionData.data.question);
       setResults(questionData.data);
       setLoading(false);

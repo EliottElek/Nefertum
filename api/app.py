@@ -6,6 +6,8 @@ import numpy as np
 import json
 import random
 from scripts.getLikelyResults import getLikelyResults
+from scripts.getSources import getSources
+from scripts.getAttributes import getAttributes
 import shutil
 
 
@@ -77,7 +79,7 @@ class Answer(Resource):
                     "answers": [body]
                 }
                 data.append(new_row)
-            
+
         with open("./data/answers.json", "w") as jsonFile:
             json.dump(data, jsonFile)
 
@@ -92,11 +94,11 @@ class Answers(Resource):
         # Store answer in json file
         # opening file
         found = False
-        with open("answers.json", "r") as outfile:
+        with open("./data/answers.json", "r") as outfile:
             data = json.load(outfile)
             foundRow = []
             for row in data:
-                if row["session_id"] == session_id: 
+                if row["session_id"] == session_id:
                     found = True
                     foundRow = row
                 else:
@@ -113,8 +115,20 @@ class Start(Resource):
         src_path = "./data/matrix.csv"
         dst_path = "./matrixes/" + session_id + ".csv"
         shutil.copy(src_path, dst_path)
-        
+
         return {'data': getNextQuestion(session_id)}, 200
+
+
+class Sources(Resource):
+    def get(self):
+
+        return {'data': getSources()}, 200
+
+
+class Attributes(Resource):
+    def get(self):
+
+        return {'data': getAttributes()}, 200
 
 
 class LikelyResults(Resource):
@@ -145,6 +159,8 @@ api.add_resource(Questions, '/questions')
 api.add_resource(Start, '/start/<session_id>')
 api.add_resource(Answer, '/answer/<session_id>')
 api.add_resource(Answers, '/answers/<session_id>')
+api.add_resource(Sources, '/sources')
+api.add_resource(Attributes, '/attributes')
 api.add_resource(LikelyResults, '/likely_results/<session_id>')
 
 if __name__ == '__main__':

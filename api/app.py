@@ -53,6 +53,7 @@ def getNextQuestion(session_id):
         random_number = random.randint(0, len(json_array)-1)
 
     # return data and 200 OK code
+    print(list[random_number])
     return list[random_number]
 
 
@@ -86,6 +87,7 @@ class Answer(Resource):
         # Compute the next question to send
             attribute = body["question"]["attribute"]
             answer = body["answer"]["label"]
+        # return {'data': getNextQuestion(session_id)}, 200
         return {'data': getLikelyResults(session_id, attribute, answer)}, 200
 
 

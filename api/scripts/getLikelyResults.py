@@ -1,3 +1,5 @@
+from cmath import nan
+from ctypes import resize
 import pandas as pd
 import numpy as np
 
@@ -7,10 +9,14 @@ def getLikelyResults(session_id, attribute, answer):
     sources = []
     results = []
     matrix = pd.read_csv(session_matrix)
+    matrix = matrix[matrix['Aromatic'].notna()]
+
     if(answer == "No"):
         matrix.drop(matrix[matrix[attribute] != 0].index, inplace=True)
     else:
         matrix.drop(matrix[matrix[attribute] == 0].index, inplace=True)
+
+    matrix = matrix[matrix['Aromatic'].notna()]
     matrix.to_csv(session_matrix)
 
     ########    FINDING MOST DISCRIMINANT QUESTION (RESULTS IN CONSOLE)     ########
@@ -32,13 +38,12 @@ def getLikelyResults(session_id, attribute, answer):
     # qBases = ["Can your smell be defined as ", "Would you qualify your smell as ", "Is your smell "]
 
     nextQuestion = {"attribute": matrix.columns[int(
-        results[0][0])], "label": qBases[0] + matrix.columns[int(results[0][0])] + "?"}
-
+        results[0][0])], "label": qBases[0] + matrix.columns[int(results[0][0])] + "?", "imageSupport": ""}
     lists = matrix['label'].tolist()
     for item in lists:
         sources.append({"label": item})
 
-    if (len(matrix) < 10):
+    if (len(matrix) < 10) or np.array_equal(results, scores):
         return {"result": True, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}
 
     return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}

@@ -69,13 +69,22 @@ const Game = () => {
           <img className="max-w-[50%]" src={question.imageSupport} />
         )}
         <Acc sessionId={sessionId} question={question} results={results} />
-        <div className="flex-col flex gap-8">
-          <Typography variant="paragraph" className="text-gray-50">
+        <div className="flex-col flex gap-1">
+          <Typography variant="paragraph" className="text-gray-50 my-2">
             Question {index + 1}
           </Typography>
 
-          <Typography variant="h5" className="text-gray-50">
+          <Typography variant="h5" className="text-gray-50 mt-2">
             {question && question.label}
+          </Typography>
+          <Typography className="text-gray-50 mb-4 mt-4 hover:underline text-sm">
+            <a
+              target="_blank"
+              href={`https://www.reverso.net/traduction-texte#sl=eng&tl=fra&text=${question?.attribute?.toLowerCase()}`}
+            >
+              See the translation of {question?.attribute.toLowerCase()} in
+              french.
+            </a>
           </Typography>
           <div className="flex flex-col gap-4">
             {ResponsesDisplay.map((answer, i) => (

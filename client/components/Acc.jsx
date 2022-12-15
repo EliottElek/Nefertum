@@ -113,13 +113,14 @@ export default function Acc({ sessionId, question, results }) {
       >
         From our calculations, you smell would be...
         <Typography variant="h6" className="pt-5">
-          <ul>
+          {/* <ul>
             {results?.sources?.map((result, i) => (
               <li>
                 <li key={i}>{result.label}</li>
               </li>
             ))}
-          </ul>
+          </ul> */}
+          {results?.sources[0]?.label}
         </Typography>
       </CustomModal>
     </div>

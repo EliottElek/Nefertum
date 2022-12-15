@@ -8,8 +8,7 @@ const SelectComponent = ({ sources, selected, setSelected }) => {
   return (
     <div>
       <Select
-        primaryColor="purple"
-        
+        primaryColor="purple"   
         value={selected}
         isMultiple
         isSearchable

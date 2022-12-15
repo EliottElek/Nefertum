@@ -48,6 +48,7 @@ const Game = () => {
         setSessionId(id);
         const { data } = await axios.get(`http://localhost:5000/start/${id}`);
         setQuestion(data.data);
+        console.log(id);
         setLoading(false);
       } catch (err) {
         console.log(err);

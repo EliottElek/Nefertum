@@ -43,13 +43,14 @@ try:
                     # Add attribute to source of attribute
                     attr_list.append(value["value"])
                     # Remove duplicates
-                    attr_list = list(dict.fromkeys(attr_list))
+        attr_list = list(dict.fromkeys(attr_list))
 
         for source in tmp:
             for key, value in source.items():
                 if (key == "source"):
                     # Add source to list of sources
                     source_list.append([value["value"]])
+        #source_list = list(dict.fromkeys(source_list))
 
         with open(csv_file, 'w', newline='') as file:
             writer = csv.writer(file)
@@ -62,6 +63,8 @@ try:
         # want, you can use mean or median, etc
         # df.replace(r'^\s*$', 0, regex=True)
         df.fillna(0, inplace=True)
+        df = df[df['Aromatic'].notna()]
+
         df.to_csv(csv_file)
         df = pd.read_csv(csv_file, index_col="Sources/Attributes")
         for row in tmp:

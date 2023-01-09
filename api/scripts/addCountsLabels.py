@@ -29,7 +29,6 @@ try:
         tmp = data["results"]["bindings"]
         # Save our changes to JSON file
         jsonFile = open(json_file, "w+")
-
         jsonFile.write(json.dumps(tmp))
         jsonFile.close()
         df = pd.read_csv(csv_file, index_col="Sources/Attributes")
@@ -41,7 +40,9 @@ try:
                 df.loc[source, "count"] = float(count)
                 df.loc[source, "label"] = label
         # Write DataFrame to CSV file
+        df.drop_duplicates(subset=['label'], inplace=True)
         df.to_csv(csv_file)
+
     print(colored('Labels and counts added with success.✅', 'green'))
 
 

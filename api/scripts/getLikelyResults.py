@@ -2,10 +2,12 @@ from cmath import nan
 from ctypes import resize
 import pandas as pd
 import numpy as np
+from scripts.getRandQuestion import getRandQuestion
 
 
 def getLikelyResults(session_id, attribute, answer):
     session_matrix = "./matrixes/" + session_id + ".csv"
+    notDecisive = False
     sources = []
     results = []
     matrix = pd.read_csv(session_matrix)
@@ -13,8 +15,10 @@ def getLikelyResults(session_id, attribute, answer):
 
     if(answer == "No"):
         matrix.drop(matrix[matrix[attribute] != 0].index, inplace=True)
-    else:
+    elif(answer == "Yes"):
         matrix.drop(matrix[matrix[attribute] == 0].index, inplace=True)
+    else:
+        notDecisive = True
 
     matrix = matrix[matrix['Aromatic'].notna()]
     matrix.to_csv(session_matrix)
@@ -43,7 +47,10 @@ def getLikelyResults(session_id, attribute, answer):
     for item in lists:
         sources.append({"label": item})
 
-    if (len(matrix) < 10) or np.array_equal(results, scores):
+    if(notDecisive == True):
+        return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": getRandQuestion()}
+
+    if (len(matrix) == 1) or np.array_equal(results, scores):
         return {"result": True, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}
 
     return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}

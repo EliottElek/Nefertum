@@ -21,7 +21,7 @@ const Game = () => {
     setLoading(true);
     try {
       const { data: questionData } = await axios.post(
-        `http://localhost:5000/answer/${sessionId}`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/answer/${sessionId}`,
         {
           data: {
             question: question,
@@ -46,7 +46,9 @@ const Game = () => {
       try {
         const id = uuidv4();
         setSessionId(id);
-        const { data } = await axios.get(`http://localhost:5000/start/${id}`);
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_ENDPOINT}/start/${id}`
+        );
         setQuestion(data.data);
         console.log(id);
         setLoading(false);
@@ -87,7 +89,7 @@ const Game = () => {
               french.
             </a>
           </Typography>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
             {ResponsesDisplay.map((answer, i) => (
               <Button
                 variant="outlined"

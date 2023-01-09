@@ -10,7 +10,9 @@ if (len(filelist) == 0):
     print(colored('No .csv file to delete.', 'green'))
 
 else:
-    print(colored('Deleting ' + str(len(filelist))+' files...', 'green'))
+    print(colored('Deleting ' + str(len(filelist))+' matrixes...', 'green'))
     for f in filelist:
         os.remove(f)
     print(colored('Done ✅', 'green'))
+
+############## CLEARING ANSWERS ###################

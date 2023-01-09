@@ -23,7 +23,7 @@ export default function Acc({ sessionId, question, results }) {
     const loadAnswers = async () => {
       try {
         const { data: answ } = await axios.get(
-          `http://localhost:5000/answers/${sessionId}`
+          `${process.env.NEXT_PUBLIC_API_ENDPOINT}/answers/${sessionId}`
         );
         setAnswers(answ.data.answers);
       } catch (err) {}

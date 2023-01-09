@@ -11,6 +11,7 @@ def getAttributes():
     jsonFile = open(json_file, "r")
     data = json.load(jsonFile)  # Read the JSON into the buffer
     jsonFile.close()  # Close the JSON file
+
     sources_list = []
     for row in data:
         attribute = row["attribute"]

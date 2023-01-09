@@ -14,10 +14,13 @@ def getSources():
     data = json.load(jsonFile)  # Read the JSON into the buffer
     jsonFile.close()  # Close the JSON file
     sources_list = []
-    for row in data:
+    unique = {each["label"]["value"]: each for each in data}.values()
+
+    for row in unique:
         source = row["source"]["value"]
         label = row["label"]["value"]
         if label not in sources_list:
             sources_list.append(
                 {"value": label, "label": label, "source": source})
+
     return sources_list

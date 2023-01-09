@@ -33,7 +33,6 @@ try:
         tmp = data["results"]["bindings"]
         # Save our changes to JSON file
         jsonFile = open(json_file, "w+")
-
         jsonFile.write(json.dumps(tmp))
         jsonFile.close()
         # Creating header of csv file with all attributes

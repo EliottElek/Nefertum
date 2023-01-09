@@ -2,9 +2,8 @@ from flask import Flask, request, session
 from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
 import pandas as pd
-import numpy as np
 import json
-import random
+from scripts.getRandQuestion import getRandQuestion
 from scripts.getLikelyResults import getLikelyResults
 from scripts.getSources import getSources
 from scripts.getAttributes import getAttributes
@@ -34,27 +33,6 @@ class Questions(Resource):
             list.append(details)
     # convert dataframe to dictionary
         return {'data': list}, 200  # return data and 200 OK code
-
-
-def getNextQuestion(session_id):
-
-    ########    CURRENT WAY OF CHOOSING NEXT QUESTION (RANDOMLY)     ########
-    input_file = open('./data/questions.json')
-    json_array = json.load(input_file)
-    list = []
-
-    for item in json_array:
-        details = {"attribute": None, "label": None}
-        details['attribute'] = item['attribute']
-        details['label'] = item['label']
-        details['imageSupport'] = item['imageSupport']
-
-        list.append(details)
-        random_number = random.randint(0, len(json_array)-1)
-
-    # return data and 200 OK code
-    print(list[random_number])
-    return list[random_number]
 
 
 class Answer(Resource):
@@ -118,7 +96,7 @@ class Start(Resource):
         dst_path = "./matrixes/" + session_id + ".csv"
         shutil.copy(src_path, dst_path)
 
-        return {'data': getNextQuestion(session_id)}, 200
+        return {'data': getRandQuestion()}, 200
 
 
 class Sources(Resource):

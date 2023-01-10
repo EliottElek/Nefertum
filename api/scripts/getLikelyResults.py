@@ -23,7 +23,7 @@ def getLikelyResults(session_id, attribute, answer):
             matrix.loc[matrix[attribute] != 0, ["score"]] += 3
             matrix.loc[matrix[attribute] == 0, ["score"]] -= 3
 
-        case "Probably":
+        case "Probably yes":
             matrix.loc[matrix[attribute] != 0, ["score"]] += 1
             matrix.loc[matrix[attribute] == 0, ["score"]] -= 1
 
@@ -43,9 +43,7 @@ def getLikelyResults(session_id, attribute, answer):
     matrix.to_csv(session_matrix)
 
     ########    FINDING MOST DISCRIMINANT QUESTION (RESULTS IN CONSOLE)     ########
-    # Converting the matrix to a numpy array after having remove the lines with a negative score 
-    # We are also removing 4 columns that must be ignored during this process
-    nMatrix = matrix.drop(matrix[matrix["score"] < 0].index).drop(columns = ["Sources/Attributes", "label", "score", "count"]).to_numpy()
+    nMatrix = matrix.drop(matrix[matrix["score"] < 0].index).to_numpy()
     questionScores = np.empty(len(nMatrix[0]), dtype=[
         ('columnIndex', int), ('questionScore', float)])
     for j in range(len(nMatrix[0])):
@@ -68,7 +66,7 @@ def getLikelyResults(session_id, attribute, answer):
     for item in lists:
         sources.append({"label": item})
 
-    if (len(matrix) < 10) or (matrix.iloc[[0]]["score"].values[0] > 20):
+    if (len(matrix) < 10) or (matrix.iloc[[0]]["score"].values[0] > 15):
         return {"result": True, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}
 
     return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}

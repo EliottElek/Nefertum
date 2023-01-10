@@ -11,7 +11,7 @@ def getLikelyResults(session_id, attribute, answer):
     sources = []
     results = []
     matrix = pd.read_csv(session_matrix)
-    matrix = matrix[matrix['Aromatic'].notna()]
+    # matrix = matrix[matrix['Aromatic'].notna()]
 
     # if (answer == "No"):
     #     matrix.drop(matrix[matrix[attribute] != 0].index, inplace=True)
@@ -23,7 +23,7 @@ def getLikelyResults(session_id, attribute, answer):
             matrix.loc[matrix[attribute] != 0, ["score"]] += 3
             matrix.loc[matrix[attribute] == 0, ["score"]] -= 3
 
-        case "Probably yes":
+        case "Probably":
             matrix.loc[matrix[attribute] != 0, ["score"]] += 1
             matrix.loc[matrix[attribute] == 0, ["score"]] -= 1
 
@@ -43,7 +43,9 @@ def getLikelyResults(session_id, attribute, answer):
     matrix.to_csv(session_matrix)
 
     ########    FINDING MOST DISCRIMINANT QUESTION (RESULTS IN CONSOLE)     ########
-    nMatrix = matrix.drop(matrix[matrix["score"] < 0].index).to_numpy()
+    # Converting the matrix to a numpy array after having remove the lines with a negative score 
+    # We are also removing 4 columns that must be ignored during this process
+    nMatrix = matrix.drop(matrix[matrix["score"] < 0].index).drop(columns = ["Sources/Attributes", "label", "score", "count"]).to_numpy()
     questionScores = np.empty(len(nMatrix[0]), dtype=[
         ('columnIndex', int), ('questionScore', float)])
     for j in range(len(nMatrix[0])):
@@ -59,13 +61,14 @@ def getLikelyResults(session_id, attribute, answer):
     # qBases = ["Can your smell be defined as "]
     qBases = ["Can your smell be defined as ", "Would you qualify your smell as ", "Is your smell "]
 
+    # Adding 4 to compensate the ignored columns during the question selection
     nextQuestion = {"attribute": matrix.columns[int(
-        results[0][0])], "label": qBases[0] + matrix.columns[int(results[0][0])] + "?", "imageSupport": ""}
+        results[0][0])+4], "label": qBases[0] + matrix.columns[int(results[0][0])+4] + "?", "imageSupport": ""}
     lists = matrix['label'].tolist()
     for item in lists:
         sources.append({"label": item})
 
-    if (len(matrix) < 10) or (matrix.iloc[[0]]["score"].values[0] > 15):
+    if (len(matrix) < 10) or (matrix.iloc[[0]]["score"].values[0] > 20):
         return {"result": True, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}
 
     return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}

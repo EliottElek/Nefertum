@@ -13,7 +13,7 @@ sparql.setReturnFormat(JSON)
 
 sparql.setQuery(mainQuery)
 
-attr_list = ["Sources/Attributes", "label", "count"]
+attr_list = ["Sources/Attributes", "label", "score", "count"]
 source_list = []
 
 path = os.path.join("./", "data")

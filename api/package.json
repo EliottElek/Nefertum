@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "python3 ./matrixes/clearMatrixes.py && flask run",
-    "generate_matrix": "python3 ./scripts/fetcher.py && python3 ./scripts/addCountsLabels.py",
-    "generate_questions": "python3 ./scripts/generateAttributesQuestions.py",
-    "clean": "python3 ./matrixes/clearMatrixes.py"
+    "dev": "python ./matrixes/clearMatrixes.py && flask run",
+    "generate_matrix": "python ./scripts/fetcher.py && python3 ./scripts/addCountsLabels.py",
+    "generate_questions": "python ./scripts/generateAttributesQuestions.py",
+    "clean": "python ./matrixes/clearMatrixes.py"
   }
 }

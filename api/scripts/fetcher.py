@@ -13,7 +13,7 @@ sparql.setReturnFormat(JSON)
 
 sparql.setQuery(mainQuery)
 
-attr_list = ["Sources/Attributes", "label", "count"]
+attr_list = ["Sources/Attributes", "label", "score", "count"]
 source_list = []
 
 path = os.path.join("./", "data")
@@ -62,7 +62,8 @@ try:
         # want, you can use mean or median, etc
         # df.replace(r'^\s*$', 0, regex=True)
         df.fillna(0, inplace=True)
-        #df = df.drop(df['Fine'].notna())
+        # df.drop(df[df['Aromatic'].notna()], inplace=True)
+        # df = df[df['Aromatic'].notna()]
 
         df.to_csv(csv_file)
         df = pd.read_csv(csv_file, index_col="Sources/Attributes")

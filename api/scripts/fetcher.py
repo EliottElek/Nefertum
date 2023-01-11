@@ -62,7 +62,7 @@ try:
         # want, you can use mean or median, etc
         # df.replace(r'^\s*$', 0, regex=True)
         df.fillna(0, inplace=True)
-        df = df[df['Aromatic'].notna()]
+        #df = df.drop(df['Fine'].notna())
 
         df.to_csv(csv_file)
         df = pd.read_csv(csv_file, index_col="Sources/Attributes")

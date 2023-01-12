@@ -170,7 +170,7 @@ const wrongSource = () => {
                 it in the databse.
               </Typography>
               <input
-                className="w-full border rounded p-2 px-2 text-sm mt-2"
+                className="w-full focus:outline-none border border-gray-300 rounded p-2 px-2 text-sm"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder="The name of your source..."
@@ -187,7 +187,7 @@ const wrongSource = () => {
           </Tabs>
         </div>
 
-        {/* <Toaster /> */}
+        <Toaster />
       </CustomModal>
     </div>
   );

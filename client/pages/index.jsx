@@ -1,6 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
-import ButtonCustom from "../components/Button";
+import { NewGameCard, AddSourceCard, FeedBackCard } from "../components/Card";
 import { useAppContext } from "../context";
 import Head from "next/head";
 export default function Home() {
@@ -12,18 +12,18 @@ export default function Home() {
         <title>Nefertum</title>
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
-      <div className="flex max-w-[95%] text-gray-50 flex-col md:max-w-xl h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
-        <Typography variant="h2">Welcome to Nefertum !</Typography>
-        <Typography variant="paragraph">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus ad
-          reprehenderit omnis perspiciatis aut odit! Unde architecto
-          perspiciatis, dolorum dolorem iure quia saepe autem accusamus eum
-          praesentium magni corrupti explicabo!
-        </Typography>
+      <div className="flex flex-col max-w-2xl text-center items-center justify-center text-gray-50">
+        <h1 className="text-6xl uppercase">Nefertum</h1>
+        <h4 className="text-2xl my-10">Odeuropa's guessing game for smells.</h4>
+        <p>
+          Ire mille, inpatiens. Suis si tellus: eius plenum studiosus pectora
+          flammaeque credar sola mentisque statione Medon! Lingua ut pectore
+          oscula. Noviens mors quem omnia, ferunt subitisque latus, Nox ingemuit
+          quod aratos solis. Inclusum illa petebatur cuique vates Andraemon
+          Ulixes, iam vina, miserrima.
+        </p>
         <Link href="/game">
-          <ButtonCustom variant="gradient">
-            Start a game against Nefertum !
-          </ButtonCustom>
+          <span className="px-10 py-4 border-2 cursor-pointer rounded-full my-10">Start a game</span>
         </Link>
       </div>
     </>

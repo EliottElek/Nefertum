@@ -6,7 +6,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { Spinner } from "flowbite-react";
 import Head from "next/head";
 import { supabase } from "../lib/supabase";
-const wrongSource = () => {
+const Feedback = () => {
   const [openModal, setOpenModal] = useState(true);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -102,4 +102,4 @@ const wrongSource = () => {
   );
 };
 
-export default wrongSource;
+export default Feedback;

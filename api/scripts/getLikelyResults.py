@@ -11,46 +11,62 @@ def getLikelyResults(session_id, attribute, answer):
     sources = []
     results = []
     matrix = pd.read_csv(session_matrix)
-    matrix = matrix[matrix['Aromatic'].notna()]
+    # matrix = matrix[matrix['Aromatic'].notna()]
 
-    if(answer == "No"):
-        matrix.drop(matrix[matrix[attribute] != 0].index, inplace=True)
-    elif(answer == "Yes"):
-        matrix.drop(matrix[matrix[attribute] == 0].index, inplace=True)
-    else:
-        notDecisive = True
+    # if (answer == "No"):
+    #     matrix.drop(matrix[matrix[attribute] != 0].index, inplace=True)
+    # else:
+    #     matrix.drop(matrix[matrix[attribute] == 0].index, inplace=True)
 
-    matrix = matrix[matrix['Aromatic'].notna()]
+    match answer:
+        case "Yes":
+            matrix.loc[matrix[attribute] != 0, ["score"]] += 3
+            matrix.loc[matrix[attribute] == 0, ["score"]] -= 3
+
+        case "Probably yes":
+            matrix.loc[matrix[attribute] != 0, ["score"]] += 1
+            matrix.loc[matrix[attribute] == 0, ["score"]] -= 1
+
+        case "Probably not":
+            matrix.loc[matrix[attribute] == 0, ["score"]] += 1
+            matrix.loc[matrix[attribute] != 0, ["score"]] -= 1
+
+        case "No":
+            matrix.loc[matrix[attribute] == 0, ["score"]] += 3
+            matrix.loc[matrix[attribute] != 0, ["score"]] -= 3
+        
+    matrix.drop(columns = attribute, inplace=True)
+    matrix.drop(matrix[matrix["score"] < -4].index, inplace=True)
+    matrix.sort_values(by='score', ascending=False, inplace=True)
+    
+    # matrix = matrix[matrix['Aromatic'].notna()]
     matrix.to_csv(session_matrix)
 
     ########    FINDING MOST DISCRIMINANT QUESTION (RESULTS IN CONSOLE)     ########
-
-    nMatrix = matrix.to_numpy()
-    scores = np.empty(len(nMatrix[0]), dtype=[
-                      ('columnIndex', int), ('score', float)])
+    nMatrix = matrix.drop(matrix[matrix["score"] < 0].index).to_numpy()
+    questionScores = np.empty(len(nMatrix[0]), dtype=[
+        ('columnIndex', int), ('questionScore', float)])
     for j in range(len(nMatrix[0])):
         col = nMatrix[:, j]
         count = 0
         for i in range(len(col)):
-            if(col[i] == 0):
+            if (col[i] == 0):
                 count += 1
-        score = np.abs(len(nMatrix)/2 - count)
-        scores[j] = (j, score)
-    results = np.sort(scores, order='score')
+        questionScore = np.abs(len(nMatrix)/2 - count)
+        questionScores[j] = (j, questionScore)
+    results = np.sort(questionScores, order='questionScore')
 
-    qBases = ["Can your smell be defined as "]
-    # qBases = ["Can your smell be defined as ", "Would you qualify your smell as ", "Is your smell "]
+    # qBases = ["Can your smell be defined as "]
+    qBases = ["Can your smell be defined as ", "Would you qualify your smell as ", "Is your smell "]
 
+    # Adding 4 to compensate the ignored columns during the question selection
     nextQuestion = {"attribute": matrix.columns[int(
-        results[0][0])], "label": qBases[0] + matrix.columns[int(results[0][0])] + "?", "imageSupport": ""}
+        results[0][0])+4], "label": qBases[0] + matrix.columns[int(results[0][0])+4] + "?", "imageSupport": ""}
     lists = matrix['label'].tolist()
     for item in lists:
         sources.append({"label": item})
 
-    if(notDecisive == True):
-        return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": getRandQuestion()}
-
-    if (len(matrix) == 1) or np.array_equal(results, scores):
+    if (len(matrix) < 10) or (matrix.iloc[[0]]["score"].values[0] > 15):
         return {"result": True, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}
 
     return {"result": False, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}

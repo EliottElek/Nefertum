@@ -10,9 +10,9 @@ export const Responses = {
 
 export const ResponsesDisplay = [
   { label: "Yes", weight: 1 },
-  // { label: "Probably", weight: 1 },
+  { label: "Probably", weight: 1 },
   { label: "I don't know", weight: 2 },
-  // { label: "Probably not", weight: 3 },
+  { label: "Probably not", weight: 3 },
   { label: "No", weight: 0 },
 ];
 

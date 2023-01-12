@@ -4,19 +4,11 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
-import {
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import ButtonCustom from "../components/Button";
 import CustomModal from "../components/Modal";
 import { useAppContext } from "../context";
 import { useRouter } from "next/router";
-const navigation = [{ name: "New game", href: "/game" }];
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -34,53 +26,35 @@ export default function Layout({ children }) {
   };
   return (
     <div
-      className="min-h-screen w-full bg-cover"
+      className="min-h-screen w-full bg-cover relative"
       style={{ backgroundImage: `url("${bg}")` }}
     >
       <Disclosure as="nav" className="bg-transparent sticky top-0 z-10">
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-10 p-3 text-gray-50">
               <div className="flex h-16 items-center justify-between">
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex-shrink-0 flex items-center pt-4">
-                    <Link href={"/"}>
-                      <img
-                        className="w-12 h-12 cursor-pointer"
-                        src={"/logo.svg"}
-                        alt="An SVG of an eye"
-                      />
-                    </Link>
-                    <div className="hidden md:block">
-                      <div className="ml-10 flex items-baseline space-x-4">
-                        <ButtonCustom onClick={newGame}>
-                          New game !
-                        </ButtonCustom>
-                        <Link href="/add-source">
-                          <ButtonCustom variant="outlined">
-                            Add a source
-                          </ButtonCustom>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="pt-5 hidden md:block">
-                    <Menu>
-                      <MenuHandler>
-                        <Button color="purple">Theme</Button>
-                      </MenuHandler>
-                      <MenuList>
-                        {["", "2", "3", "4", "5", "6", "7"].map((bgItem) => (
-                          <MenuItem onClick={() => setBg(`/bg${bgItem}.jpg`)}>
-                            <img
-                              src={`/bg${bgItem}.jpg`}
-                              className="h-14 w-full object-cover"
-                            />
-                          </MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-                  </div>
+                <div className="flex items-center">
+                  <Link href="/feedback">
+                    <span className="cursor-pointer hover:underline">
+                      Give us feedback
+                    </span>
+                  </Link>
+                </div>
+                <div className="flex items-center gap-12">
+                  <Link href="/">
+                    <span className="cursor-pointer hover:underline">Home</span>
+                  </Link>
+                  <button onClick={newGame}>
+                    <span className="cursor-pointer hover:underline">
+                      New game
+                    </span>
+                  </button>
+                  <Link href="/add-source">
+                    <span className="cursor-pointer hover:underline">
+                      Add a source
+                    </span>
+                  </Link>
                 </div>
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}

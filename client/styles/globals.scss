@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@900&display=swap");
+
+html {
+  overflow: hidden;
+  height: 100vh;
+}
+* {
+  font-family: "Exo";
+  font-weight: 100;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 20px;
+  margin: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(165, 164, 164, 0.36);
+  border-radius: 20px;
+}
+path {
+  fill: transparent;
+}
+
+text {
+  fill: white;
+  font-size: 2rem;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: #cf46ca;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  padding: 16px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 36px;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.274);
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button:after {
+  content: "\203A";
+  position: absolute;
+  opacity: 0;
+  top: 14px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover {
+  padding-right: 24px;
+  padding-left: 8px;
+}
+
+.button:hover:after {
+  opacity: 1;
+  right: 10px;
+}

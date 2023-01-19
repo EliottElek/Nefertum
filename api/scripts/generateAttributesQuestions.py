@@ -13,7 +13,7 @@ sparql.setQuery(questionsDataQuery)
 
 attr_list = ["Sources/Attributes", "count"]
 source_list = []
-path = os.path.join("./", "data")
+path = os.path.join("app/", "data")
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "questions.json")
 

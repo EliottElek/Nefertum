@@ -3,10 +3,14 @@ from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
 import pandas as pd
 import json
+
+from termcolor import colored
 from scripts.getRandQuestion import getRandQuestion
 from scripts.getLikelyResults import getLikelyResults
 from scripts.getSources import getSources
 from scripts.getAttributes import getAttributes
+from scripts.getTextFromSourceAttribute import getTextFromSourceAttribute
+
 import shutil
 
 
@@ -116,7 +120,7 @@ class LikelyResults(Resource):
         # Get latest answer from session ID
         # opening file
         found = False
-        with open("answers.json", "r") as outfile:
+        with open("./data/answers.json", "r") as outfile:
             data = json.load(outfile)
             foundRow = []
             for row in data:
@@ -135,6 +139,58 @@ class LikelyResults(Resource):
         return {'data': getLikelyResults(session_id, attribute, answer)}, 200
 
 
+class answerJustifier(Resource):
+    def post(self, session_id):
+        # Store answer in json file
+        # opening file
+
+        # getting answer from post request
+        body = request.json["data"]
+        # getting last answer
+        # Get latest answer from session ID
+        # opening file
+        found = False
+        with open("./data/answers.json", "r") as outfile:
+            data = json.load(outfile)
+            foundRow = []
+            for row in data:
+                if row["session_id"] == session_id:
+                    found = True
+                    foundRow = row
+                else:
+                    found = False
+            if found == False:
+                return False
+            else:
+                answer1 = 0
+                answer2 = 0
+                for answer in foundRow["answers"]:
+                    if answer2 != 0:
+                        break
+                    if answer["answer"]["label"] == 'Yes':
+                        if answer1 == 0:
+                            answer1 = answer
+                        elif answer2 == 0:
+                            answer2 = answer
+
+                print(colored(answer1, "green"))
+                print(colored(answer2, "green"))
+
+                attribute1 = answer1["question"]["attribute"]
+                attribute2 = answer2["question"]["attribute"]
+                list = getAttributes()
+                id1 = 0
+                id2 = 0
+                for row in list:
+                    if row["value"] == attribute1:
+                        id1 = row["id"]
+                    elif row["value"] == attribute2:
+                        id2 = row["id"]
+
+            text = getTextFromSourceAttribute(body["id"], id1, id2)
+        return {'data': text}, 200
+
+
 api.add_resource(Questions, '/questions')
 api.add_resource(Start, '/start/<session_id>')
 api.add_resource(Answer, '/answer/<session_id>')
@@ -142,6 +198,7 @@ api.add_resource(Answers, '/answers/<session_id>')
 api.add_resource(Sources, '/sources')
 api.add_resource(Attributes, '/attributes')
 api.add_resource(LikelyResults, '/likely_results/<session_id>')
+api.add_resource(answerJustifier, '/answer_justifier/<session_id>')
 
 if __name__ == '__main__':
-    app.run()  # run our Flask app
+    app.run(host='0.0.0.0')

@@ -11,7 +11,7 @@ sparql = SPARQLWrapper(
 sparql.setReturnFormat(JSON)
 
 sparql.setQuery(getCountsQuery)
-path = os.path.join("./", "data")
+path = os.path.join("app/", "data")
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "counts.json")
 print('Adding labels and counts to generated matrix...')

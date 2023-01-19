@@ -18,10 +18,10 @@ export default function Home() {
         <p className="mt-4 px-5">
           Introducing Nefertum, the ultimate smell guessing game! Just like
           Akinator, but for smells. Challenge yourself and your friends to see
-          if you can correctly identify a variety of scents, from the sweet
+          if Nefertum can correctly identify a variety of scents, from the sweet
           aroma of fresh flowers to the pungent smell of spices. With Nefertum,
           you'll never run out of new smells to guess and discover. Play now and
-          see how many you can get right!
+          see how many it can get right!
         </p>
         <Link href="/game">
           <span className="button px-10 py-4 border cursor-pointer rounded-full my-10">

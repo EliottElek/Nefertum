@@ -1,6 +1,5 @@
 import json
 from SPARQLWrapper import SPARQLWrapper, JSON
-from attr import attr, attributes
 
 
 sparql = SPARQLWrapper(

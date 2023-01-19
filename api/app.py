@@ -1,7 +1,7 @@
-from flask import Flask, request, session
+import os
+from flask import Flask, request
 from flask_cors import CORS
-from flask_restful import Resource, Api, reqparse
-import pandas as pd
+from flask_restful import Resource, Api
 import json
 
 from termcolor import colored
@@ -20,10 +20,15 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 app.config['SECRET_KEY'] = 'oh_so_secret'
 
+path = os.path.join("app/", "data")
+pathMatrix = os.path.join("app/", "matrixes")
+csv_file = os.path.join(path, "matrix.csv")
+json_file = os.path.join(path,  "data.json")
+
 
 class Questions(Resource):
     def get(self):
-        input_file = open('./data/questions.json')
+        input_file = open(os.path.join(path,  "questions.json"))
         json_array = json.load(input_file)
         # data = pd.read_json('questions.json')  # read JSON
         list = []
@@ -46,7 +51,7 @@ class Answer(Resource):
         body = request.json["data"]
         found = True
         # opening file
-        with open("./data/answers.json", "r+") as outfile:
+        with open(os.path.join(path,  "answers.json"), "r+") as outfile:
             data = json.load(outfile)
             for row in data:
                 if row["session_id"] == session_id:
@@ -63,7 +68,7 @@ class Answer(Resource):
                 }
                 data.append(new_row)
 
-        with open("./data/answers.json", "w") as jsonFile:
+        with open(os.path.join(path,  "answers.json"), "w") as jsonFile:
             json.dump(data, jsonFile)
 
         # Compute the next question to send
@@ -78,7 +83,7 @@ class Answers(Resource):
         # Store answer in json file
         # opening file
         found = False
-        with open("./data/answers.json", "r") as outfile:
+        with open(os.path.join(path,  "answers.json"), "r") as outfile:
             data = json.load(outfile)
             foundRow = []
             for row in data:
@@ -96,8 +101,8 @@ class Answers(Resource):
 class Start(Resource):
     def get(self, session_id):
         # We create a copy of matrix.csv called <session_id>.csv
-        src_path = "./data/matrix.csv"
-        dst_path = "./matrixes/" + session_id + ".csv"
+        src_path = os.path.join(path,  "matrix.csv")
+        dst_path = os.path.join(pathMatrix, session_id + ".csv")
         shutil.copy(src_path, dst_path)
 
         return {'data': getRandQuestion()}, 200
@@ -120,7 +125,7 @@ class LikelyResults(Resource):
         # Get latest answer from session ID
         # opening file
         found = False
-        with open("./data/answers.json", "r") as outfile:
+        with open(os.path.join(path,  "answers.json"), "r") as outfile:
             data = json.load(outfile)
             foundRow = []
             for row in data:
@@ -150,7 +155,7 @@ class answerJustifier(Resource):
         # Get latest answer from session ID
         # opening file
         found = False
-        with open("./data/answers.json", "r") as outfile:
+        with open(os.path.join(path,  "answers.json"), "r") as outfile:
             data = json.load(outfile)
             foundRow = []
             for row in data:
@@ -173,8 +178,8 @@ class answerJustifier(Resource):
                         elif answer2 == 0:
                             answer2 = answer
 
-                print(colored(answer1, "green"))
-                print(colored(answer2, "green"))
+                # print(colored(answer1, "green"))
+                # print(colored(answer2, "green"))
 
                 attribute1 = answer1["question"]["attribute"]
                 attribute2 = answer2["question"]["attribute"]

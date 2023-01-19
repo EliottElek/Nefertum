@@ -1,12 +1,16 @@
 from cmath import nan
 from ctypes import resize
+import os
 import pandas as pd
 import numpy as np
 from scripts.getRandQuestion import getRandQuestion
 
+path = os.path.join("app/", "data")
+pathMatrix = os.path.join("app/", "matrixes")
+
 
 def getLikelyResults(session_id, attribute, answer):
-    session_matrix = "./matrixes/" + session_id + ".csv"
+    session_matrix = os.path.join(pathMatrix, session_id + ".csv")
     notDecisive = False
     sources = []
     results = []
@@ -43,7 +47,8 @@ def getLikelyResults(session_id, attribute, answer):
     matrix.to_csv(session_matrix)
 
     ########    FINDING MOST DISCRIMINANT QUESTION (RESULTS IN CONSOLE)     ########
-    nMatrix = matrix.drop(matrix[matrix["score"] < 0].index).to_numpy()
+    nMatrix = matrix.drop(matrix[matrix["score"] < 0].index).drop(
+        columns=["Sources/Attributes", "label", "score", "count"]).to_numpy()
     questionScores = np.empty(len(nMatrix[0]), dtype=[
         ('columnIndex', int), ('questionScore', float)])
     for j in range(len(nMatrix[0])):

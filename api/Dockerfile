@@ -6,4 +6,6 @@ RUN pip3 install numpy --upgrade
 COPY . /code/app
 CMD python3 app/matrixes/clearMatrixes.py && python3 app/scripts/fetcher.py && python3 app/scripts/addCountsLabels.py && python3 app/scripts/generateAttributesQuestions.py
 CMD env FLASK_APP=app/app.py
+CMD cd code
+CMD cd app
 CMD ["env","FLASK_APP=app/app.py", "flask", "run", "-h", "0.0.0.0", "-p", "5000"]

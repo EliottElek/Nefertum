@@ -25,15 +25,18 @@ const Feedbacks = () => {
         <title>Nefertum | Feedbacks</title>
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
-      <div className="flex max-w-[95%] overflow-auto text-gray-50 max-h-[80vh] flex-col md:max-w-5xl h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
-        <Typography variant="h3">Users feedbacks</Typography>
+      <div className="flex max-w-[95%] overflow-auto text-gray-50 flex-col md:max-w-5xl h-full mt-10  gap-10">
+        <Typography variant="h2">Users feedbacks</Typography>
         {feedbacks?.length === 0 ? (
           <p>No feedback for the moment.</p>
         ) : (
           <ul>
             {feedbacks?.map((feedback) => (
-              <li>
-                {feedback.name ? feedback.name : "Unknown"} - {feedback.comment}
+              <li className="flex gap-2 mt-4">
+                <span className="text-purple-400">
+                  {feedback.name ? feedback.name : "Unknown"}
+                </span>{" "}
+                {feedback.comment}
               </li>
             ))}
           </ul>

@@ -1,9 +1,6 @@
-import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
-import { NewGameCard, AddSourceCard, FeedBackCard } from "../components/Card";
 import { useAppContext } from "../context";
 import Head from "next/head";
-import { renderBoldStrings } from "../lib/boldString";
 export default function Home() {
   const { setSessionId } = useAppContext();
   setSessionId(null);

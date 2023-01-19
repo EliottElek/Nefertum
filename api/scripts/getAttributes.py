@@ -15,7 +15,8 @@ def getAttributes():
     sources_list = []
     for row in data:
         attribute = row["attribute"]
+        id = row["word"]["value"]
         if attribute not in sources_list:
             sources_list.append(
-                {"value": attribute, "label": attribute})
+                {"value": attribute, "label": attribute, "id": id})
     return sources_list

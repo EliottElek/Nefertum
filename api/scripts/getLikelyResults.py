@@ -34,11 +34,11 @@ def getLikelyResults(session_id, attribute, answer):
         case "No":
             matrix.loc[matrix[attribute] == 0, ["score"]] += 3
             matrix.loc[matrix[attribute] != 0, ["score"]] -= 3
-        
-    matrix.drop(columns = attribute, inplace=True)
+
+    matrix.drop(columns=attribute, inplace=True)
     matrix.drop(matrix[matrix["score"] < -4].index, inplace=True)
     matrix.sort_values(by='score', ascending=False, inplace=True)
-    
+
     # matrix = matrix[matrix['Aromatic'].notna()]
     matrix.to_csv(session_matrix)
 
@@ -57,14 +57,16 @@ def getLikelyResults(session_id, attribute, answer):
     results = np.sort(questionScores, order='questionScore')
 
     # qBases = ["Can your smell be defined as "]
-    qBases = ["Can your smell be defined as ", "Would you qualify your smell as ", "Is your smell "]
+    qBases = ["Can your smell be defined as ",
+              "Would you qualify your smell as ", "Is your smell "]
 
     # Adding 4 to compensate the ignored columns during the question selection
     nextQuestion = {"attribute": matrix.columns[int(
         results[0][0])+4], "label": qBases[0] + matrix.columns[int(results[0][0])+4] + "?", "imageSupport": ""}
-    lists = matrix['label'].tolist()
-    for item in lists:
-        sources.append({"label": item})
+    lists = matrix['label'].to_list()
+    ids = matrix["Sources/Attributes"].tolist()
+    for i in range(len(lists)):
+        sources.append({"label": lists[i], "id": ids[i]})
 
     if (len(matrix) < 10) or (matrix.iloc[[0]]["score"].values[0] > 15):
         return {"result": True, "length": len(matrix), "sources": sources[0: 10], "question": nextQuestion}

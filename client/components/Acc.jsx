@@ -8,8 +8,11 @@ import {
 } from "@material-tailwind/react";
 import CustomModal from "./Modal";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+import { renderBoldStrings } from "../lib/boldString";
 export default function Acc({ sessionId, question, results }) {
-  const [open, setOpen] = useState(1);
+  const [open, setOpen] = useState(0);
+  const [contextAnswer, setContextAnswer] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
   const handleOpen = (value) => {
@@ -19,6 +22,19 @@ export default function Acc({ sessionId, question, results }) {
 
   const parentRef = useRef();
 
+  const handleMakeContextRequest = async () => {
+    if (!results) return;
+    try {
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/answer_justifier/${sessionId}`,
+        { data: results?.sources[0] }
+      );
+      console.log(data);
+      setContextAnswer(data.data.data);
+    } catch (err) {
+      toast.error("An error occured.");
+    }
+  };
   useEffect(() => {
     const loadAnswers = async () => {
       try {
@@ -48,7 +64,7 @@ export default function Acc({ sessionId, question, results }) {
   }, [parentRef]);
 
   return (
-    <div className="self-start !text-gray-50 pr-5 h-full md:max-w-xs w-full">
+    <div className="self-start !text-gray-50 pr-5 max-w-xl m-auto w-full">
       <Fragment>
         <Accordion
           animate={customAnimation}
@@ -111,17 +127,42 @@ export default function Acc({ sessionId, question, results }) {
         }}
         onSubmit={() => {}}
       >
-        From our calculations, you smell would be...
-        <Typography variant="h6" className="pt-5">
-          {/* <ul>
+        <div>
+          From our calculations, you smell would be...
+          <Typography variant="h6" className="pt-5">
+            {/* <ul>
             {results?.sources?.map((result, i) => (
               <li>
                 <li key={i}>{result.label}</li>
               </li>
             ))}
           </ul> */}
-          {results?.sources[0]?.label}
-        </Typography>
+            {results?.sources[0]?.label}
+          </Typography>
+          {!contextAnswer && (
+            <button
+              onClick={handleMakeContextRequest}
+              className="mt-10 text-sm hover:underline"
+            >
+              Why this result ?{" "}
+            </button>
+          )}
+          {contextAnswer && contextAnswer.length > 0 ? (
+            <div>
+              {contextAnswer?.map((answer) => (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: renderBoldStrings(answer?.value, [
+                      results?.sources[0]?.label,
+                    ]),
+                  }}
+                ></div>
+              ))}
+            </div>
+          ) : (
+            contextAnswer && <p>We could not provide you with more context.</p>
+          )}
+        </div>
       </CustomModal>
     </div>
   );

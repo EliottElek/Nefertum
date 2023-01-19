@@ -22,16 +22,18 @@ const Feedback = () => {
 
   const onSubmit = async () => {
     setLoading(true);
+    if (name === "") {
+      setMessage("Name field is required.");
+      setLoading(false);
+      return;
+    }
     if (comment === "") {
-      setMessage("You must selected a source.");
+      setMessage("Comment field is required.");
       setLoading(false);
       return;
     }
     try {
-      const { data: source } = await supabase
-        .from("feedback")
-        .insert({ comment: comment, name: name });
-
+      await supabase.from("feedback").insert({ comment: comment, name: name });
       setLoading(false);
       toast.success("Your feedback was successfully submitted.");
       setTimeout(() => {

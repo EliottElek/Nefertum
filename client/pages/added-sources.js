@@ -38,8 +38,10 @@ const AddedSources = () => {
         <title>Nefertum | Added sources</title>
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
-      <div className="flex max-w-[95%] overflow-auto pl-[400px] text-gray-50 max-h-[80vh] flex-col md:max-w-5xl h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
-        <Typography variant="h3">Community added sources</Typography>
+      <div className="w-8xl max-w-[90vw] overflow-auto">
+        <Typography variant="h3" className="text-gray-50 my-2">
+          Community added sources
+        </Typography>
         {sources?.length === 0 ? (
           <p>No source for the moment.</p>
         ) : (

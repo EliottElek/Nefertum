@@ -21,7 +21,7 @@ export default function CustomModal({
   const handleOpen = () => setOpen(!open);
   return (
     <div className="!max-w-xl w-[90%]">
-      <Dialog open={open} handler={handleOpen} className="!max-w-xl w-[90%]">
+      <Dialog open={open} handler={handleOpen} className="!max-w-xl w-[90%] max-h-[90%] overflow-auto">
         <DialogHeader>{title}</DialogHeader>
         <DialogBody divider className="flex-col">
           {children}

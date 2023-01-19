@@ -1,5 +1,5 @@
 import Layout from "../layout";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import { ThemeProvider } from "@material-tailwind/react";
 import { AppWrapper } from "../context";
 

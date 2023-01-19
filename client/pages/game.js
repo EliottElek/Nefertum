@@ -67,7 +67,7 @@ const Game = () => {
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
       {loading && <Backdrop />}
-      <div className="flex w-[95%] max-w-4xl  flex-col-reverse md:flex-row h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
+      <div className="flex w-[95%] max-w-4xl flex-col-reverse  items-center justify-center gap-10 rounded-xl">
         {question && question.imageSupport && (
           <img className="max-w-[50%]" src={question.imageSupport} />
         )}
@@ -76,8 +76,7 @@ const Game = () => {
           <Typography variant="paragraph" className="text-gray-50 my-2">
             Question {index + 1}
           </Typography>
-
-          <Typography variant="h5" className="text-gray-50 mt-2">
+          <Typography variant="h3" className="text-gray-50 mt-2">
             {question && question.label}
           </Typography>
           <Typography className="text-gray-50 mb-4 mt-4 hover:underline text-sm">

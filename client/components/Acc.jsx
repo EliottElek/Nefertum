@@ -125,7 +125,9 @@ export default function Acc({ sessionId, question, results }) {
         onCancel={() => {
           router.push("/add-source");
         }}
-        onSubmit={() => {}}
+        onSubmit={() => {
+          router.push("/");
+        }}
       >
         <div>
           From our calculations, you smell would be...

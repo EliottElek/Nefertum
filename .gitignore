@@ -112,3 +112,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Python files
+__pycache__
+
+# macOS files
+.DS_Store

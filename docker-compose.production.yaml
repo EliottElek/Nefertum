@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  api:
+    ports:
+      - "5581:5000"
+
+  client:
+    ports:
+      - "3381:3000"

@@ -67,7 +67,7 @@ const Game = () => {
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
       {loading && <Backdrop />}
-      <div className="flex w-[95%] max-w-4xl flex-col-reverse  items-center justify-center gap-10 rounded-xl">
+      <div className="flex max-w-[95%] w-6xl pt-4 flex-col-reverse gap-10 rounded-xl">
         {question && question.imageSupport && (
           <img className="max-w-[50%]" src={question.imageSupport} />
         )}
@@ -76,7 +76,7 @@ const Game = () => {
           <Typography variant="paragraph" className="text-gray-50 my-2">
             Question {index + 1}
           </Typography>
-          <Typography variant="h3" className="text-gray-50 mt-2">
+          <Typography variant="h3" className="text-gray-50 ">
             {question && question.label}
           </Typography>
           <Typography className="text-gray-50 mb-4 mt-4 hover:underline text-sm">
@@ -88,7 +88,7 @@ const Game = () => {
               french.
             </a>
           </Typography>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 p-4">
             {ResponsesDisplay.map((answer, i) => (
               <Button
                 variant="outlined"

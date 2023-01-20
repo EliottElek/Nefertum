@@ -3,12 +3,20 @@ export const renderBoldStrings = (string, words) => {
   if (!words || words.length === 0 || !string) return;
   for (const word in words) {
     let re = new RegExp(`\\b${words[word]}s?\\b`, "gi");
-    string = string.replace(
-      re,
-      `<strong style = "color : rgb(147 51 234); font-weight: bold">${words[
-        word
-      ].toLowerCase()}</strong>`
-    );
+    if (word == 0)
+      string = string.replace(
+        re,
+        `<span style = "color : rgb(147 51 234); font-weight: bold">${words[
+          word
+        ].toLowerCase()}</span>`
+      );
+    else
+      string = string.replace(
+        re,
+        `<strong style = "color : orange; font-weight: bold">${words[
+          word
+        ].toLowerCase()}</strong>`
+      );
   }
   return `"${string}"`;
 };

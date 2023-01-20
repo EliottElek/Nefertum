@@ -6,7 +6,7 @@ const ButtonCustom = (props) => {
       color="purple"
       {...props}
       className={
-        "px-4  py-3  border-slate-400 rounded-lg focus:outline-none text-gray-200 hover:text-gray-50 hover:border-gray-50"
+        "px-4  py-4  border-slate-400 rounded-lg focus:outline-none text-gray-200 hover:text-gray-50 hover:border-gray-50"
       }
     />
   );

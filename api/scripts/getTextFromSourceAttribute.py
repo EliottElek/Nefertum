@@ -15,7 +15,9 @@ def getTextFromSourceAttribute(source, attribute1, attribute2):
 PREFIX crm: <http://erlangen-crm.org/current/>
 PREFIX od: <http://data.odeuropa.eu/ontology/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-SELECT ?text WHERE {{
+PREFIX schema: <https://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?text ?author ?title ?date WHERE {{
     VALUES ?smell_source {{ <{0}> }}
     VALUES ?quality {{ <{1}> <{2}> }} 
     
@@ -26,21 +28,21 @@ SELECT ?text WHERE {{
     
     ?textual_res crm:P67_refers_to ?smell ;
                  rdf:value ?text.
+    ?book crm:P67_refers_to ?smell ;
+          schema:author / rdfs:label ?author ;
+          rdfs:label ?title ;
+          schema:dateCreated / rdfs:label ?date .
     FILTER (lang(?text) = 'en')
 }} limit 3
-""".format(source, attribute1, attribute2).replace("\n", "")
-    print(query)
+""".format(source, attribute1["id"], attribute2["id"]).replace("\n", "")
 
     try:
         sparql.setQuery(query)
 
         ret = sparql.queryAndConvert()
         texts = ret["results"]["bindings"]
-        results = []
-        for text in texts:
-            results.append(text["text"])
 
-        return {"data": results}
+        return {"texts": texts,  "attr1": attribute1, "attr2": attribute2}
 
     except Exception as e:
         print(e)

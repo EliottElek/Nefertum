@@ -1,16 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Exo:wght@900&display=swap");
 
-html {
-  overflow: hidden;
-  height: 100vh;
+html,
+body {
+  @apply bg-gradient-to-r from-[#2b333b] to-[#516170];
 }
+
 * {
-  font-family: "Exo";
-  font-weight: 100;
+  font-family: "Exo" !important;
+  font-weight: 100 !important;
 }
 
 *::-webkit-scrollbar {
@@ -28,15 +30,6 @@ html {
   background: rgba(165, 164, 164, 0.36);
   border-radius: 20px;
 }
-path {
-  fill: transparent;
-}
-
-text {
-  fill: white;
-  font-size: 2rem;
-}
-
 .button {
   border-radius: 4px;
   background-color: #cf46ca;
@@ -75,4 +68,13 @@ text {
 .button:hover:after {
   opacity: 1;
   right: 10px;
+}
+
+.navbar {
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }

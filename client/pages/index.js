@@ -11,8 +11,8 @@ export default function Home() {
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
       <div className="flex flex-col max-w-2xl text-center items-center h-screen justify-center text-gray-50">
-        <h1 className = "text-8xl px-3">Nefertum</h1>
-        <p className="mt-4 px-5">
+        <h1 className="md:text-8xl text-5xl px-3">Nefertum</h1>
+        <p className="mt-4">
           Introducing Nefertum, the ultimate smell guessing game! Just like
           Akinator, but for smells. Challenge yourself and your friends to see
           if Nefertum can correctly identify a variety of scents, from the sweet

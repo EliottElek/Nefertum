@@ -37,7 +37,7 @@ const Feedback = () => {
       setLoading(false);
       toast.success("Your feedback was successfully submitted.");
       setTimeout(() => {
-        router.push("/added-sources");
+        router.push("/feedbacks");
       }, 2000);
     } catch (e) {
       toast.error("An error occured submitting your results.");

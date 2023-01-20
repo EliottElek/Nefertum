@@ -29,8 +29,8 @@ export default function Acc({ sessionId, question, results }) {
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/answer_justifier/${sessionId}`,
         { data: results?.sources[0] }
       );
-      console.log(data);
-      setContextAnswer(data.data.data);
+      console.log(data.data);
+      setContextAnswer(data.data);
     } catch (err) {
       toast.error("An error occured.");
     }
@@ -64,7 +64,7 @@ export default function Acc({ sessionId, question, results }) {
   }, [parentRef]);
 
   return (
-    <div className="self-start !text-gray-50 pr-5 max-w-xl m-auto w-full">
+    <div className="self-start !text-gray-50 m-auto w-full flex-1 flex flex-col">
       <Fragment>
         <Accordion
           animate={customAnimation}
@@ -126,21 +126,21 @@ export default function Acc({ sessionId, question, results }) {
           router.push("/add-source");
         }}
         onSubmit={() => {
-          router.push("/");
+          router.push("/feedback");
         }}
       >
         <div>
           From our calculations, you smell would be...
-          <Typography variant="h6" className="pt-5">
-            {/* <ul>
-            {results?.sources?.map((result, i) => (
-              <li>
-                <li key={i}>{result.label}</li>
-              </li>
-            ))}
-          </ul> */}
+          <Typography variant="h4" className="pt-5 text-gray-700">
             {results?.sources[0]?.label}
           </Typography>
+          <a
+            target="_blank"
+            className = "!font-sans hover:underline text-sm"
+            href={`https://www.reverso.net/traduction-texte#sl=eng&tl=fra&text=${question?.attribute?.toLowerCase()}`}
+          >
+            See the translation of {results?.sources[0]?.label} in french.
+          </a>
           {!contextAnswer && (
             <button
               onClick={handleMakeContextRequest}
@@ -149,16 +149,26 @@ export default function Acc({ sessionId, question, results }) {
               Why this result ?{" "}
             </button>
           )}
-          {contextAnswer && contextAnswer.length > 0 ? (
+          {contextAnswer && contextAnswer?.texts?.length > 0 ? (
             <div>
-              {contextAnswer?.map((answer) => (
+              {contextAnswer?.texts.map((answer, i) => (
                 <div
-                  dangerouslySetInnerHTML={{
-                    __html: renderBoldStrings(answer?.value, [
-                      results?.sources[0]?.label,
-                    ]),
-                  }}
-                ></div>
+                  key={i}
+                  className="flex mt-4 flex-col !font-bold !font-sans"
+                >
+                  {answer?.title?.value}, {answer?.author?.value},{" "}
+                  {answer?.date?.value}
+                  <div
+                    className="italic !font-normal !font-sans"
+                    dangerouslySetInnerHTML={{
+                      __html: renderBoldStrings(answer?.text.value, [
+                        results?.sources[0]?.label,
+                        contextAnswer?.attr1?.attribute,
+                        contextAnswer?.attr2?.attribute,
+                      ]),
+                    }}
+                  ></div>
+                </div>
               ))}
             </div>
           ) : (

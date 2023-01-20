@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 from scripts.getRandQuestion import getRandQuestion
 
-path = os.path.join("app/", "data")
-pathMatrix = os.path.join("app/", "matrixes")
+path = os.path.join("./", "data")
+pathMatrix = os.path.join("./", "matrixes")
 
 
 def getLikelyResults(session_id, attribute, answer):
@@ -67,7 +67,7 @@ def getLikelyResults(session_id, attribute, answer):
 
     # Adding 4 to compensate the ignored columns during the question selection
     nextQuestion = {"attribute": matrix.columns[int(
-        results[0][0])+4], "label": qBases[0] + matrix.columns[int(results[0][0])+4] + "?", "imageSupport": ""}
+        results[0][0])+4], "label": qBases[0] + matrix.columns[int(results[0][0])+4].lower() + "?", "imageSupport": ""}
     lists = matrix['label'].to_list()
     ids = matrix["Sources/Attributes"].tolist()
     for i in range(len(lists)):

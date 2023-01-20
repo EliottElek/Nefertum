@@ -1,3 +1,4 @@
+import glob
 import os
 from flask import Flask, request
 from flask_cors import CORS
@@ -10,7 +11,6 @@ from scripts.getLikelyResults import getLikelyResults
 from scripts.getSources import getSources
 from scripts.getAttributes import getAttributes
 from scripts.getTextFromSourceAttribute import getTextFromSourceAttribute
-
 import shutil
 
 
@@ -20,8 +20,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 app.config['SECRET_KEY'] = 'oh_so_secret'
 
-path = os.path.join("app/", "data")
-pathMatrix = os.path.join("app/", "matrixes")
+path = os.path.join("./", "data")
+pathMatrix = os.path.join("./", "matrixes")
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "data.json")
 
@@ -120,6 +120,19 @@ class Attributes(Resource):
         return {'data': getAttributes()}, 200
 
 
+class ClearMatrixes(Resource):
+    def post(self):
+        path = os.path.join("./", "matrixes")
+
+        filelist = glob.glob(os.path.join(path, "*.csv"))
+        if (len(filelist) == 0):
+            return {'success': True}, 200
+        else:
+            for f in filelist:
+                os.remove(f)
+            return {'success': True}, 200
+
+
 class LikelyResults(Resource):
     def get(self, session_id):
         # Get latest answer from session ID
@@ -172,7 +185,7 @@ class answerJustifier(Resource):
                 for answer in foundRow["answers"]:
                     if answer2 != 0:
                         break
-                    if answer["answer"]["label"] == 'Yes':
+                    if answer["answer"]["label"] == 'Yes' or answer["answer"]["label"] == "I don't know":
                         if answer1 == 0:
                             answer1 = answer
                         elif answer2 == 0:
@@ -188,9 +201,9 @@ class answerJustifier(Resource):
                 id2 = 0
                 for row in list:
                     if row["value"] == attribute1:
-                        id1 = row["id"]
+                        id1 = {"id": row["id"], "attribute": attribute1}
                     elif row["value"] == attribute2:
-                        id2 = row["id"]
+                        id2 = {"id": row["id"], "attribute": attribute2}
 
             text = getTextFromSourceAttribute(body["id"], id1, id2)
         return {'data': text}, 200
@@ -202,6 +215,7 @@ api.add_resource(Answer, '/answer/<session_id>')
 api.add_resource(Answers, '/answers/<session_id>')
 api.add_resource(Sources, '/sources')
 api.add_resource(Attributes, '/attributes')
+api.add_resource(ClearMatrixes, '/clear-matrixes')
 api.add_resource(LikelyResults, '/likely_results/<session_id>')
 api.add_resource(answerJustifier, '/answer_justifier/<session_id>')
 

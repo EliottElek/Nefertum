@@ -129,15 +129,15 @@ export default function Acc({ sessionId, question, results }) {
           router.push("/feedback");
         }}
       >
-        <div>
+        <div className="flex flex-col items-start">
           From our calculations, you smell would be...
           <Typography variant="h4" className="pt-5 text-gray-700">
             {results?.sources[0]?.label}
           </Typography>
           <a
             target="_blank"
-            className = "!font-sans hover:underline text-sm"
-            href={`https://www.reverso.net/traduction-texte#sl=eng&tl=fra&text=${question?.attribute?.toLowerCase()}`}
+            className="!font-sans hover:underline text-sm"
+            href={`https://www.reverso.net/traduction-texte#sl=eng&tl=fra&text=${results?.sources[0]?.label.toLowerCase()}`}
           >
             See the translation of {results?.sources[0]?.label} in french.
           </a>

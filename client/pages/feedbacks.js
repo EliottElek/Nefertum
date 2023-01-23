@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@material-tailwind/react";
+import { Spinner } from "flowbite-react";
 import { supabase } from "../lib/supabase";
 import toast from "react-hot-toast";
 import Head from "next/head";
@@ -27,6 +28,16 @@ const Feedbacks = () => {
       </Head>
       <div className="flex max-w-[95%] overflow-auto text-gray-50 flex-col md:max-w-5xl h-full mt-10  gap-10">
         <Typography variant="h2">Users feedbacks</Typography>
+        {!feedbacks && (
+          <div className="flex items-center gap-3">
+            <p>Loading feedbacks...</p>
+            <Spinner
+              ariaLabel="Default status example"
+              size="md"
+              color="purple"
+            />
+          </div>
+        )}
         {feedbacks?.length === 0 ? (
           <p>No feedback for the moment.</p>
         ) : (

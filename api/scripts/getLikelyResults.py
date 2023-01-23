@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 from scripts.getRandQuestion import getRandQuestion
 
-path = os.path.join("./", "data")
-pathMatrix = os.path.join("./", "matrixes")
+path = os.path.join("app/", "data")
+pathMatrix = os.path.join("app/", "matrixes")
 
 
 def getLikelyResults(session_id, attribute, answer):

@@ -3,7 +3,7 @@ import os
 import os.path
 
 from termcolor import colored
-path = os.path.join("./", "matrixes")
+path = os.path.join("app/", "matrixes")
 
 filelist = glob.glob(os.path.join(path, "*.csv"))
 if (len(filelist) == 0):

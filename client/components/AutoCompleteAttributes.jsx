@@ -1,24 +1,16 @@
-import Select from "react-tailwindcss-select";
+import React from "react";
 
-const SelectComponent = ({ sources, selected, setSelected }) => {
-  const handleChange = (value) => {
-    setSelected(value);
-  };
+import CreatableSelect from "react-select/creatable";
 
-  return (
-    <div>
-      <Select
-        primaryColor="purple"   
-        value={selected}
-        isMultiple
-        isSearchable
-        onChange={handleChange}
-        options={sources ? sources : []}
-        loading={!sources}
-        placeholder="Tags..."
-      />
-    </div>
-  );
-};
-
-export default SelectComponent;
+export default ({ sources, setSelected }) => (
+  <CreatableSelect
+    isClearable
+    onChange={(s) => setSelected(s)}
+    classNames={{
+      control: (state) =>
+        state.isFocused ? "outline-purple-600" : "outline-purple-300",
+    }}
+    isMulti
+    options={sources ? sources : []}
+  />
+);

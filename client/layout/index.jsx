@@ -27,10 +27,7 @@ export default function Layout({ children }) {
       className="h-screen p-16 overflow-y-auto overflow-x-hidden flex items-center justify-start flex-col w-full bg-cover relative bg-gradient-to-r from-[#2b333b] to-[#516170]"
       // style={{ backgroundImage: `url("${bg}")` }}
     >
-      <Disclosure
-        as="nav"
-        className="fixed w-full top-0 z-10"
-      >
+      <Disclosure as="nav" className="fixed w-full top-0 z-10">
         {({ open }) => (
           <>
             <div className="mx-auto p-3 text-gray-50">
@@ -161,7 +158,8 @@ export default function Layout({ children }) {
         onCancel={() => {}}
       >
         If you start a new game against Nefertum, all your progress for this
-        session will be lost. (session id : {sessionId})<br />
+        session will be lost.
+        <br />
         <Typography variant="h6" className="pt-5">
           Are you sure you want to continue ?
         </Typography>

@@ -2,9 +2,11 @@
 
 Akinator like guesser for smells.
 
-Demo available at https://nefertum.tools.eurecom.fr/
-View feedbacks at https://nefertum.tools.eurecom.fr/feedbacks
-View community added sources at https://nefertum.tools.eurecom.fr/added-sources
+- Demo available at https://nefertum.tools.eurecom.fr/
+- View feedbacks at https://nefertum.tools.eurecom.fr/feedbacks
+- View community added sources at https://nefertum.tools.eurecom.fr/added-sources
+
+
 ## How to deploy for production
 
 1. In the `client/` directory, copy the file `.env.example` into `.env.production` and edit it accordingly:

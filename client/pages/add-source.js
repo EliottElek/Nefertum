@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import CustomModal from "../components/Modal";
 import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/router";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import AutoCompleteSource from "../components/AutoCompleteSource";
 import AutoCompleteAttributes from "../components/AutoCompleteAttributes";
 import { toast, Toaster } from "react-hot-toast";
@@ -10,7 +9,6 @@ import { Spinner } from "flowbite-react";
 import Head from "next/head";
 import axios from "axios";
 import { supabase } from "../lib/supabase";
-import Tabs, { Tab } from "../components/Tabs";
 const wrongSource = () => {
   const [openModal, setOpenModal] = useState(true);
   const [message, setMessage] = useState(null);
@@ -142,51 +140,25 @@ const wrongSource = () => {
         onSubmit={onSubmit}
       >
         <div className="overflow-auto min-h-[50vh]">
-          <Tabs>
-            <Tab title="From database">
-              <span className="text-red-500">{message}</span>
-              <Typography variant="paragraph">
-                Please tell us what you were thinking of, so that we can do
-                better next time.
-              </Typography>
-              <AutoCompleteSource
-                sources={sources}
-                selected={selectedSource}
-                setSelected={setSelectedSource}
-              />
-              <Typography variant="paragraph" className="pt-8">
-                Select every adjective that can describe your source.
-              </Typography>
-              <AutoCompleteAttributes
-                sources={attributes}
-                selected={selectedAttributes}
-                setSelected={setSelectedAttributes}
-              />
-            </Tab>
-            <Tab title="from scratch">
-              <span className="text-red-500">{message}</span>
-              <Typography variant="paragraph">
-                Please add the source you were thinking of, if you couldn't find
-                it in the databse.
-              </Typography>
-              <input
-                className="w-full focus:outline-none border border-gray-300 rounded p-2 px-2 text-sm"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                placeholder="The name of your source..."
-              />
-              <Typography variant="paragraph" className="pt-8">
-                Select every adjective that can describe your source.
-              </Typography>
-              <AutoCompleteAttributes
-                sources={attributes}
-                selected={selectedAttributes}
-                setSelected={setSelectedAttributes}
-              />
-            </Tab>
-          </Tabs>
+          <span className="text-red-500">{message}</span>
+          <Typography variant="paragraph">
+            Please tell us what you were thinking of, so that we can do better
+            next time.
+          </Typography>
+          <AutoCompleteSource
+            sources={sources}
+            selected={selectedSource}
+            setSelected={setSelectedSource}
+          />
+          <Typography variant="paragraph" className="pt-8">
+            Select every adjective that can describe your source.
+          </Typography>
+          <AutoCompleteAttributes
+            sources={attributes}
+            selected={selectedAttributes}
+            setSelected={setSelectedAttributes}
+          />
         </div>
-
         <Toaster />
       </CustomModal>
     </div>

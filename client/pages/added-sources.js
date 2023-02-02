@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
+import ButtonCustom from "../components/Button";
 import { supabase } from "../lib/supabase";
 import { Table } from "flowbite-react";
 import toast from "react-hot-toast";
@@ -43,9 +44,7 @@ const AddedSources = () => {
         <Typography variant="h3" className="text-gray-50 my-2">
           Community added sources
         </Typography>
-        <Button onClick={() => tableToCSV()} color="purple">
-          Download
-        </Button>
+        <ButtonCustom onClick={() => tableToCSV()}>Download</ButtonCustom>
       </div>
       <div className="w-8xl max-w-[90vw] h-[70vh] overflow-auto">
         {sources?.length === 0 ? (
@@ -71,13 +70,14 @@ const AddedSources = () => {
                     </Table.Cell>
                     {attributes?.map((att) => (
                       <Table.Cell className="whitespace-nowrap text-center font-medium text-gray-900 dark:text-white">
-                        {mappings?.findIndex(
-                          (m) =>
-                            m.source_id === source.id &&
-                            m.attribute_id === att.id
-                        ) !== -1
-                          ? "1" // <CheckIcon className="w-5 h-5 text-green-500" />
-                          : "0" // <XMarkIcon className="w-5 h-5 text-red-500" />
+                        {
+                          mappings?.findIndex(
+                            (m) =>
+                              m.source_id === source.id &&
+                              m.attribute_id === att.id
+                          ) !== -1
+                            ? "1" // <CheckIcon className="w-5 h-5 text-green-500" />
+                            : "0" // <XMarkIcon className="w-5 h-5 text-red-500" />
                         }
                       </Table.Cell>
                     ))}

@@ -30,6 +30,7 @@ export default function Acc({ sessionId, question, results }) {
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/answer_justifier/${sessionId}`,
         { data: results?.sources[0] }
       );
+
       console.log(data.data);
       setContextAnswer(data.data);
     } catch (err) {
@@ -180,8 +181,7 @@ export default function Acc({ sessionId, question, results }) {
                     dangerouslySetInnerHTML={{
                       __html: renderBoldStrings(answer?.text.value, [
                         results?.sources[0]?.label,
-                        contextAnswer?.attr1?.attribute,
-                        contextAnswer?.attr2?.attribute,
+                        ...contextAnswer?.attributes.map((a) => a.attribute),
                       ]),
                     }}
                   ></div>

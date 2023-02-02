@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Backdrop from "../components/Backdrop";
-import Button from "../components/Button";
+import { Button } from "@material-tailwind/react";
 import { ResponsesDisplay } from "../data";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -91,6 +91,7 @@ const Game = () => {
           <div className="flex flex-col gap-1 p-4">
             {ResponsesDisplay.map((answer, i) => (
               <Button
+                color="white"
                 variant="outlined"
                 onClick={() => answerQuestion(answer)}
                 key={i}

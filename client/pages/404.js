@@ -12,13 +12,13 @@ export default function ErrorPage() {
         <title>Nefertum | 404</title>
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
-      <div className="flex max-w-[95%] text-gray-50 flex-col md:max-w-xl h-full mt-10 items-center justify-center gap-10 rounded-xl bg-white p-10 bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
+      <div className="flex max-w-[95%] text-gray-50 flex-col md:max-w-xl h-full mt-10 items-center justify-center gap-10">
         <Typography variant="h2">404 Error</Typography>
         <Typography variant="paragraph">
           The page you requested was not found. Go back home.
         </Typography>
         <Link href="/">
-          <ButtonCustom variant="gradient">Get back home</ButtonCustom>
+          <ButtonCustom>Get back home</ButtonCustom>
         </Link>
       </div>
     </>

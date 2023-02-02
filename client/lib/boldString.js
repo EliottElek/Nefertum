@@ -6,7 +6,7 @@ export const renderBoldStrings = (string, words) => {
     if (word == 0)
       string = string.replace(
         re,
-        `<span style = "color : rgb(147 51 234); font-weight: bold">${words[
+        `<span style = "color : #cf46ca; font-weight: bold">${words[
           word
         ].toLowerCase()}</span>`
       );

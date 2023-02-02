@@ -1,9 +1,25 @@
 import Link from "next/link";
 import { useAppContext } from "../context";
 import Head from "next/head";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 export default function Home() {
   const { setSessionId } = useAppContext();
+  const [stats, setStats] = useState("__");
   setSessionId(null);
+
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        const { data } = await supabase.from("games").select("won");
+        const wons = data.filter((d) => d.won);
+        setStats(Math.ceil((wons.length / data.length) * 100));
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    loadStats();
+  }, [setStats]);
   return (
     <>
       <Head>
@@ -20,6 +36,12 @@ export default function Home() {
           you'll never run out of new smells to guess and discover. Play now and
           see how many it can get right!
         </p>
+        {stats && (
+          <h3 className="text-xl mt-4">
+            <span className="text-[#cf46ca]">{stats}%</span> accuracy (still
+            learning)
+          </h3>
+        )}
         <Link href="/game">
           <span className="button px-10 py-4 border cursor-pointer rounded-full my-10">
             Start a game

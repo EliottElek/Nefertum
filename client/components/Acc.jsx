@@ -6,6 +6,7 @@ import {
   AccordionBody,
   Typography,
 } from "@material-tailwind/react";
+import { supabase } from "../lib/supabase";
 import CustomModal from "./Modal";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
@@ -63,6 +64,26 @@ export default function Acc({ sessionId, question, results }) {
     }
   }, [parentRef]);
 
+  const onGoodResult = async () => {
+    try {
+      await supabase.from("games").insert({
+        won: true,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    router.push("/feedback");
+  };
+  const onBadResult = async () => {
+    try {
+      await supabase.from("games").insert({
+        won: false,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    router.push("/add-source");
+  };
   return (
     <div className="self-start !text-gray-50 m-auto w-full flex-1 flex flex-col">
       <Fragment>
@@ -122,12 +143,8 @@ export default function Acc({ sessionId, question, results }) {
         title={"We might have a result..."}
         open={openModal}
         setOpen={setOpenModal}
-        onCancel={() => {
-          router.push("/add-source");
-        }}
-        onSubmit={() => {
-          router.push("/feedback");
-        }}
+        onCancel={onBadResult}
+        onSubmit={onGoodResult}
       >
         <div className="flex flex-col items-start">
           From our calculations, you smell would be...

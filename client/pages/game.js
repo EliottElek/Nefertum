@@ -8,7 +8,6 @@ import Acc from "../components/Acc";
 import { Typography } from "@material-tailwind/react";
 import { useAppContext } from "../context";
 import Head from "next/head";
-
 const Game = () => {
   const [index, setIndex] = useState(0);
   const [question, setQuestion] = useState(null);
@@ -50,7 +49,6 @@ const Game = () => {
           `${process.env.NEXT_PUBLIC_API_ENDPOINT}/start/${id}`
         );
         setQuestion(data.data);
-        console.log(id);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -67,18 +65,28 @@ const Game = () => {
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
       {loading && <Backdrop />}
-      <div className="flex max-w-[95%] w-6xl pt-4 flex-col-reverse gap-10 rounded-xl">
+      <div className="flex max-w-[95%] w-[700px] pt-4 flex-col-reverse gap-10 rounded-xl">
         {question && question.imageSupport && (
-          <img className="max-w-[50%]" src={question.imageSupport} />
+          <img className="max-w-[50%]" src={question?.imageSupport} />
         )}
         <Acc sessionId={sessionId} question={question} results={results} />
         <div className="flex-col flex gap-1">
-          <Typography variant="paragraph" className="text-gray-50 my-2">
-            Question {index + 1}
-          </Typography>
-          <Typography variant="h3" className="text-gray-50 ">
-            {question && question.label}
-          </Typography>
+          {!question ? (
+            questionSkeleton()
+          ) : (
+            <Typography variant="paragraph" className="text-gray-50 my-2">
+              Question ${index + 1}
+            </Typography>
+          )}
+
+          {!question ? (
+            titleSkeleton()
+          ) : (
+            <Typography variant="h3" className="text-gray-50">
+              {question?.label}
+            </Typography>
+          )}
+
           <Typography className="text-gray-50 mb-4 mt-4 hover:underline text-sm">
             <a
               target="_blank"
@@ -106,4 +114,20 @@ const Game = () => {
   );
 };
 
+const titleSkeleton = () => (
+  <div role="status" className="w-full animate-pulse">
+    <div className="flex items-center pt-4 w-full group transition-all delay-75 relative rounded-md gap-1">
+      <div className="h-8 bg-gray-400 rounded-full w-full"></div>
+    </div>
+    <span className="sr-only">Loading...</span>
+  </div>
+);
+const questionSkeleton = () => (
+  <div role="status" className="w-full animate-pulse">
+    <div className="flex items-center pt-4 w-full group transition-all delay-75 relative rounded-md gap-1">
+      <div className="h-3 bg-gray-400 rounded-full w-[30%]"></div>
+    </div>
+    <span className="sr-only">Loading...</span>
+  </div>
+);
 export default Game;

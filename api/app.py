@@ -178,34 +178,26 @@ class answerJustifier(Resource):
                 else:
                     found = False
             if found == False:
+                print("not foud")
                 return False
             else:
-                answer1 = 0
-                answer2 = 0
+                answers = []
                 for answer in foundRow["answers"]:
-                    if answer2 != 0:
-                        break
-                    if answer["answer"]["label"] == 'Yes' or answer["answer"]["label"] == "I don't know":
-                        if answer1 == 0:
-                            answer1 = answer
-                        elif answer2 == 0:
-                            answer2 = answer
 
-                # print(colored(answer1, "green"))
-                # print(colored(answer2, "green"))
+                    if answer["answer"]["label"] == 'Yes' or answer["answer"]["label"] == "I don't know" or answer["answer"]["label"] == "Probably":
+                        answers.append(answer)
 
-                attribute1 = answer1["question"]["attribute"]
-                attribute2 = answer2["question"]["attribute"]
                 list = getAttributes()
-                id1 = 0
-                id2 = 0
+                ids = []
                 for row in list:
-                    if row["value"] == attribute1:
-                        id1 = {"id": row["id"], "attribute": attribute1}
-                    elif row["value"] == attribute2:
-                        id2 = {"id": row["id"], "attribute": attribute2}
-
-            text = getTextFromSourceAttribute(body["id"], id1, id2)
+                    for answer in answers:
+                        attribute = answer["question"]["attribute"]
+                        if row["value"] == attribute:
+                            id = {"id": row["id"], "attribute": attribute}
+                            ids.append(id)
+                            print(id)
+            print("called")
+            text = getTextFromSourceAttribute(body["id"], ids)
         return {'data': text}, 200
 
 

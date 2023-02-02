@@ -8,7 +8,10 @@ sparql = SPARQLWrapper(
 sparql.setReturnFormat(JSON)
 
 
-def getTextFromSourceAttribute(source, attribute1, attribute2):
+def getTextFromSourceAttribute(source, attributes):
+    string = ""
+    for attr in attributes:
+        string = string + "<" + attr["id"]+">"
     # source = "http://data.odeuropa.eu/vocabulary/olfactory-objects/408"
     # attribute = "http://data.odeuropa.eu/vocabulary/edwards/aromatic"
     query = """
@@ -19,7 +22,7 @@ PREFIX schema: <https://schema.org/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?text ?author ?title ?date WHERE {{
     VALUES ?smell_source {{ <{0}> }}
-    VALUES ?quality {{ <{1}> <{2}> }} 
+    VALUES ?quality {{ {1} }} 
     
 	?emission od:F3_had_source / crm:P137_exemplifies ?smell_source ; 
     	od:F1_generated ?smell . 
@@ -33,8 +36,9 @@ SELECT DISTINCT ?text ?author ?title ?date WHERE {{
           rdfs:label ?title ;
           schema:dateCreated / rdfs:label ?date .
     FILTER (lang(?text) = 'en')
-}} limit 3
-""".format(source, attribute1["id"], attribute2["id"]).replace("\n", "")
+}} limit 15
+""".format(source, string).replace("\n", "")
+    print(string)
 
     try:
         sparql.setQuery(query)
@@ -42,7 +46,7 @@ SELECT DISTINCT ?text ?author ?title ?date WHERE {{
         ret = sparql.queryAndConvert()
         texts = ret["results"]["bindings"]
 
-        return {"texts": texts,  "attr1": attribute1, "attr2": attribute2}
+        return {"texts": texts,  "attributes": attributes}
 
     except Exception as e:
         print(e)

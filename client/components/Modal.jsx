@@ -32,18 +32,20 @@ export default function CustomModal({
           {children}
         </DialogBody>
         <DialogFooter>
-          <ButtonCustom
-            className="!text-[#cf46ca]"
-            disabled={cancelBtnDisabled}
-            variant="text"
-            onClick={() => {
-              handleOpen();
-              onCancel();
-            }}
-            className="mr-1"
-          >
-            <span>{cancelBtnLabel}</span>
-          </ButtonCustom>
+          {cancelBtnLabel && (
+            <ButtonCustom
+              className="!text-[#cf46ca]"
+              disabled={cancelBtnDisabled}
+              variant="text"
+              onClick={() => {
+                handleOpen();
+                onCancel();
+              }}
+              className="mr-1"
+            >
+              <span>{cancelBtnLabel}</span>
+            </ButtonCustom>
+          )}
           <ButtonCustom disabled={submitBtnDisabled} onClick={onSubmit}>
             <span>{submitBtnLabel}</span>
           </ButtonCustom>

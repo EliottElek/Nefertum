@@ -31,11 +31,7 @@ const Feedbacks = () => {
         {!feedbacks && (
           <div className="flex items-center gap-3">
             <p>Loading feedbacks...</p>
-            <Spinner
-              ariaLabel="Default status example"
-              size="md"
-              color="purple"
-            />
+            <Spinner size="md" color="purple" />
           </div>
         )}
         {feedbacks?.length === 0 ? (

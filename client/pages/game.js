@@ -99,6 +99,7 @@ const Game = () => {
           <div className="flex flex-col gap-1 p-4">
             {ResponsesDisplay.map((answer, i) => (
               <Button
+                className="py-4"
                 color="white"
                 variant="outlined"
                 onClick={() => answerQuestion(answer)}

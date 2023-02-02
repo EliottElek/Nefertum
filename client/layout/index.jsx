@@ -56,8 +56,9 @@ export default function Layout({ children }) {
                     </span>
                   </Link>
                   <a
+                    target="_blank"
                     href="https://github.com/EliottElek/Nefertum"
-                    className="flex text-gray-50 items-center gap-2"
+                    className="flex text-gray-50 items-center gap-2 hover:underline"
                   >
                     Github{" "}
                     <svg

@@ -5,6 +5,7 @@ Akinator like guesser for smells.
 - Demo available at https://nefertum.tools.eurecom.fr/
 - View feedbacks at https://nefertum.tools.eurecom.fr/feedbacks
 - View community added sources at https://nefertum.tools.eurecom.fr/added-sources
+- Clear matrixes at https://nefertum.tools.eurecom.fr/clear-matrixes
 
 
 ## How to deploy for production

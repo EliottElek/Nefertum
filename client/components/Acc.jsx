@@ -159,6 +159,11 @@ export default function Acc({ sessionId, question, results }) {
           >
             See the translation of {results?.sources[0]?.label} in french.
           </a>
+          <ol className="list-decimal	mx-4 px-2 !font-sans">
+            {results?.sources.map((s) => (
+              <li className = "!font-sans">{s.label}</li>
+            ))}
+          </ol>
           {!contextAnswer && (
             <button
               onClick={handleMakeContextRequest}

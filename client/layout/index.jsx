@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { AiFillGithub } from "react-icons/ai";
 import Link from "next/link";
 import { Typography } from "@material-tailwind/react";
 import CustomModal from "../components/Modal";
@@ -24,7 +23,8 @@ export default function Layout({ children }) {
   };
   return (
     <div
-      className="h-screen p-16 overflow-y-auto overflow-x-hidden flex items-center justify-start flex-col w-full bg-cover relative bg-gradient-to-r from-[#2b333b] to-[#516170]"
+      style={{ maxHeight: "-webkit-fill-available" }}
+      className="p-16 h-screen  overflow-y-auto overflow-x-hidden flex items-center justify-start flex-col w-full bg-cover relative bg-gradient-to-r from-[#2b333b] to-[#516170]"
       // style={{ backgroundImage: `url("${bg}")` }}
     >
       <Disclosure as="nav" className="fixed w-full top-0 z-10">

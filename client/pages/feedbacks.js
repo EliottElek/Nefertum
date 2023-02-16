@@ -39,7 +39,7 @@ const Feedbacks = () => {
         ) : (
           <ul>
             {feedbacks?.map((feedback) => (
-              <li className="flex gap-2 mt-4">
+              <li className="flex flex-col gap-2 mt-4">
                 <span className="text-[#CF46CA]">
                   {feedback.name ? feedback.name : "Unknown"}
                 </span>{" "}

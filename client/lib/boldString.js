@@ -13,9 +13,9 @@ export const renderBoldStrings = (string, words) => {
     else
       string = string.replace(
         re,
-        `<strong style = "color : orange; font-weight: bold">${words[
+        `<span style = "color : orange; font-weight: bold">${words[
           word
-        ].toLowerCase()}</strong>`
+        ].toLowerCase()}</span>`
       );
   }
   return `"${string}"`;

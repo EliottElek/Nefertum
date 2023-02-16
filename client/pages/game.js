@@ -65,7 +65,7 @@ const Game = () => {
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
       {loading && <Backdrop />}
-      <div className="flex max-w-[95%] w-[700px] pt-4 flex-col-reverse gap-10 rounded-xl">
+      <div className="flex w-[95%] max-w-[700px] pt-4 flex-col-reverse gap-10 rounded-xl">
         {question && question.imageSupport && (
           <img className="max-w-[50%]" src={question?.imageSupport} />
         )}
@@ -75,7 +75,7 @@ const Game = () => {
             questionSkeleton()
           ) : (
             <Typography variant="paragraph" className="text-gray-50 my-2">
-              Question ${index + 1}
+              Question {index + 1}
             </Typography>
           )}
 

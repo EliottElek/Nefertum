@@ -23,16 +23,15 @@ export default function Layout({ children }) {
   };
   return (
     <div
-      style={{ maxHeight: "-webkit-fill-available" }}
-      className="p-16 h-screen  overflow-y-auto overflow-x-hidden flex items-center justify-start flex-col w-full bg-cover relative bg-gradient-to-r from-[#2b333b] to-[#516170]"
+      className="flex items-center justify-center pt-16 flex-col w-full min-h-[100vh] relative"
       // style={{ backgroundImage: `url("${bg}")` }}
     >
-      <Disclosure as="nav" className="fixed w-full top-0 z-10">
+      <Disclosure as="nav" className="w-full z-10 ">
         {({ open }) => (
           <>
-            <div className="mx-auto p-3 text-gray-50">
-              <div className="flex h-16 items-center w-full justify-between">
-                <div className="items-center fixed md:left-10 right-0  hidden md:flex">
+            <div className="mx-auto w-full fixed top-0 justify-between bg-[#3f4b57] bg-opacity-20 backdrop-blur-lg  text-gray-50">
+              <div className="flex h-16 px-4 items-center">
+                <div className="items-center rounded drop-shadow-lg  hidden md:flex">
                   <Link href="/">
                     <img
                       className="h-12 cursor-pointer"
@@ -81,7 +80,7 @@ export default function Layout({ children }) {
                     />
                   </Link>
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg p-2 text-gray-800 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2  text-white focus:outline-none focus:ring-2">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -92,7 +91,7 @@ export default function Layout({ children }) {
                 </div>
               </div>
             </div>
-            <Disclosure.Panel className="md:hidden flex flex-col p-4 items-start gap-3 text-gray-50 bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
+            <Disclosure.Panel className="md:hidden fixed w-full flex flex-col p-4 items-start gap-3 text-gray-50 bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg">
               <Link href="/feedback">
                 <span className="cursor-pointer hover:underline">
                   Give us feedback
@@ -139,23 +138,26 @@ export default function Layout({ children }) {
           </>
         )}
       </Disclosure>
-      {children}
-      <div className="fixed hidden md:flex items-center bottom-0 h-16 left-10">
-        <Link href="/feedback">
-          <span className="cursor-pointer text-gray-50 hover:underline">
-            Give us feedback
-          </span>
-        </Link>
-      </div>
-      <div className="fixed text-gray-50 gap-1 hidden md:flex bottom-0 items-center h-16 right-10">
-        Powered by{" "}
-        <a
-          href="https://odeuropa.eu/"
-          className="flex underline items-center gap-2"
-        >
-          Odeuropa
-        </a>
-      </div>
+
+      <div className="flex flex-grow w-full m-auto justify-center items-center"> {children}</div>
+      <footer className="flex gap-10 items-center mt-10">
+        <div className="flex items-center bottom-0 h-16 left-10">
+          <Link href="/feedback">
+            <span className="cursor-pointer text-gray-50 hover:underline">
+              Give us feedback
+            </span>
+          </Link>
+        </div>
+        <div className=" text-gray-50 gap-1 flex bottom-0 items-center h-16 right-10">
+          Powered by{" "}
+          <a
+            href="https://odeuropa.eu/"
+            className="flex underline items-center gap-2"
+          >
+            Odeuropa
+          </a>
+        </div>
+      </footer>
       <CustomModal
         open={openModal}
         setOpen={setOpenModal}

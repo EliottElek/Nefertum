@@ -25,14 +25,14 @@ export default function Home() {
     loadStats();
   }, [setStats]);
   return (
-    <>
+    <div className="h-full">
       <Head>
         <title>Nefertum</title>
         <meta name="description" content="Nefertum, akinator for smells." />
       </Head>
-      <div className="flex flex-col max-w-2xl text-center items-center h-screen justify-center text-gray-50">
+      <div className="flex flex-col max-w-2xl text-center items-center h-full justify-center text-gray-50">
         <h1 className="md:text-8xl text-5xl px-3">Nefertum</h1>
-        <p className="mt-4">
+        <p className="mt-4 p-4">
           Introducing Nefertum, the ultimate smell guessing game! Just like
           Akinator, but for smells. Challenge yourself and your friends to see
           if Nefertum can correctly identify a variety of scents, from the sweet
@@ -66,6 +66,6 @@ export default function Home() {
           ready to play, click on the "Ready" button below.
         </div>
       </CustomModal>
-    </>
+    </div>
   );
 }

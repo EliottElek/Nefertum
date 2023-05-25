@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
         "./api/scripts"
-    ]
+    ],
+    "python.pythonPath": "/usr/local/bin/python3"
 }

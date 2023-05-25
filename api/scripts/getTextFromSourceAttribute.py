@@ -1,4 +1,3 @@
-import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 
@@ -35,10 +34,9 @@ SELECT DISTINCT ?text ?author ?title ?date WHERE {{
           schema:author / rdfs:label ?author ;
           rdfs:label ?title ;
           schema:dateCreated / rdfs:label ?date .
-    FILTER (lang(?text) = 'en')
+    FILTER (lang(?text) = "en")
 }} limit 15
 """.format(source, string).replace("\n", "")
-    print(string)
 
     try:
         sparql.setQuery(query)

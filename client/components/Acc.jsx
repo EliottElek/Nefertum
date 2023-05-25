@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { renderBoldStrings } from "../lib/boldString";
 export default function Acc({ sessionId, question, results }) {
+  console.log(results);
   const [open, setOpen] = useState(0);
   const [contextAnswer, setContextAnswer] = useState(null);
   const [openModal, setOpenModal] = useState(false);
@@ -120,7 +121,7 @@ export default function Acc({ sessionId, question, results }) {
             onClick={() => handleOpen(2)}
             className="text-gray-50 hover:text-gray-200"
           >
-            Filtered results {results && `(${results.length})`}
+            Best 10 results
           </AccordionHeader>
           <AccordionBody className="text-gray-50 h-[160px] overflow-auto pr-5">
             {!results ? (
@@ -130,9 +131,6 @@ export default function Acc({ sessionId, question, results }) {
                 {results?.sources?.map((result, i) => (
                   <li key={i}>{result.label}</li>
                 ))}
-                <li>
-                  + {results.length - results?.sources.length} more results
-                </li>
               </ul>
             )}
           </AccordionBody>
@@ -155,13 +153,13 @@ export default function Acc({ sessionId, question, results }) {
           <a
             target="_blank"
             className="!font-sans hover:underline text-sm"
-            href={`https://www.reverso.net/traduction-texte#sl=eng&tl=fra&text=${results?.sources[0]?.label.toLowerCase()}`}
+            href={`https://www.reverso.net/traduction-texte#sl=eng&tl=fra&text=${results?.sources[0]?.label?.toLowerCase()}`}
           >
             See the translation of {results?.sources[0]?.label} in french.
           </a>
           <ol className="list-decimal	mx-4 px-2 !font-sans">
             {results?.sources.map((s) => (
-              <li className = "!font-sans">{s.label}</li>
+              <li className="!font-sans">{s.label}</li>
             ))}
           </ol>
           {!contextAnswer && (

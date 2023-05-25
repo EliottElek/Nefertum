@@ -2,7 +2,7 @@ import csv
 import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 import pandas as pd
-from queries import mainQuery
+from queries import attributesQuery
 import os
 from termcolor import colored
 
@@ -11,17 +11,17 @@ sparql = SPARQLWrapper(
 )
 sparql.setReturnFormat(JSON)
 
-sparql.setQuery(mainQuery)
+sparql.setQuery(attributesQuery)
 
 attr_list = ["Sources/Attributes", "label", "score", "count"]
 source_list = []
 
-path = os.path.join("app/", "data")
+path = os.path.join("./", "data")
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "data.json")
-print('Generating matrix from odeuropa endpoint...')
+print("Generating matrix from odeuropa endpoint...")
 try:
-    with open(json_file, 'w', encoding="UTF8") as file:
+    with open(json_file, "w", encoding="UTF8") as file:
         ret = sparql.queryAndConvert()
         json_object = json.dumps(ret, indent=4)
         file.write(json_object)
@@ -40,7 +40,9 @@ try:
             for key, value in source.items():
                 if (key == "word_label"):
                     # Add attribute to source of attribute
-                    attr_list.append(value["value"])
+                    # attr_list.append(str("Attr:"+value["value"]).lower())
+                    attr_list.append(str(value["value"]).lower())
+
                     # Remove duplicates
         attr_list = list(dict.fromkeys(attr_list))
 
@@ -51,7 +53,7 @@ try:
                     source_list.append([value["value"]])
         #source_list = list(dict.fromkeys(source_list))
 
-        with open(csv_file, 'w', newline='') as file:
+        with open(csv_file, "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(attr_list)
             writer.writerows(source_list)
@@ -60,26 +62,27 @@ try:
         df = pd.read_csv(csv_file)
         # a Pandas method that fills any NaN value with 0, you can change 0 to any value you
         # want, you can use mean or median, etc
-        # df.replace(r'^\s*$', 0, regex=True)
+        # df.replace(r"^\s*$", 0, regex=True)
         df.fillna(0, inplace=True)
-        # df.drop(df[df['Aromatic'].notna()], inplace=True)
-        # df = df[df['Aromatic'].notna()]
+        # df.drop(df[df["Aromatic"].notna()], inplace=True)
+        # df = df[df["Aromatic"].notna()]
 
         df.to_csv(csv_file)
         df = pd.read_csv(csv_file, index_col="Sources/Attributes")
         for row in tmp:
-            attribute = row["word_label"]["value"]
+            # attribute = str("Attr:"+row["word_label"]["value"]).lower()
+            attribute = str(row["word_label"]["value"]).lower()
             source = row["source"]["value"]
             count = row["count"]["value"]
             df.loc[source, attribute] = float(count)
         # Delete unused column
-        df.drop('Unnamed: 0', inplace=True, axis=1)
+        df.drop("Unnamed: 0", inplace=True, axis=1)
         # Write DataFrame to CSV file
         df.to_csv(csv_file)
 
-    print(colored('Matrix generated with success.✅', 'green'))
+    print(colored("Matrix generated with success.✅", "green"))
 
 except Exception as e:
 
-    print(colored('An error occured generating the matrix.', 'red'))
+    print(colored("An error occured generating the matrix.", "red"))
     print(e)

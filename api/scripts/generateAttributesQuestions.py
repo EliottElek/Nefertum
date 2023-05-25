@@ -13,13 +13,13 @@ sparql.setQuery(questionsDataQuery)
 
 attr_list = ["Sources/Attributes", "count"]
 source_list = []
-path = os.path.join("app/", "data")
+path = os.path.join("./", "data")
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "questions.json")
 
-print('Generating questions from attributes...')
+print("Generating questions from attributes...")
 try:
-    with open(json_file, 'w', encoding="UTF8") as file:
+    with open(json_file, "w", encoding="UTF8") as file:
         ret = sparql.queryAndConvert()
         json_object = json.dumps(ret, indent=4)
         file.write(json_object)
@@ -33,7 +33,8 @@ try:
 
         for row in tmp:
             word = row["word_label"]["value"]
-            question = "Can your smell be considered as " + word + " ?"
+            question = "Can your smell be considered as " + \
+                str(word).lower() + " ?"
             row["attribute"] = word
             row["label"] = question
             row["imageSupport"] = ""
@@ -41,9 +42,9 @@ try:
         jsonFile = open(json_file, "w+")
         jsonFile.write(json.dumps(tmp))
         jsonFile.close()
-        print(colored('Attributes questions generated with success.✅', 'green'))
+        print(colored("Attributes questions generated with success.✅", "green"))
 
 
 except Exception as e:
-    print(colored('An error occured while gererating attributes questions.', 'red'))
+    print(colored("An error occured while gererating attributes questions.", "red"))
     print(e)

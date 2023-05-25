@@ -1,4 +1,4 @@
-mainQuery = """
+attributesQuery = """
 PREFIX od: <http://data.odeuropa.eu/ontology/>
 PREFIX crm: <http://erlangen-crm.org/current/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -35,7 +35,7 @@ WHERE {
 
   ?experience od:F2_perceived ?smell.
   ?source skos:prefLabel ?label
-  FILTER (lang(?label) = 'en')
+  FILTER (lang(?label) = "en")
 }
 GROUP BY ?source ?label
 ORDER BY DESC(COUNT(DISTINCT ?experience))

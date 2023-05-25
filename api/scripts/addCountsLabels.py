@@ -11,13 +11,13 @@ sparql = SPARQLWrapper(
 sparql.setReturnFormat(JSON)
 
 sparql.setQuery(getCountsQuery)
-path = os.path.join("app/", "data")
+path = os.path.join("./", "data")
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "counts.json")
-print('Adding labels and counts to generated matrix...')
+print("Adding labels and counts to generated matrix...")
 
 try:
-    with open(json_file, 'w', encoding="UTF8") as file:
+    with open(json_file, "w", encoding="UTF8") as file:
         ret = sparql.queryAndConvert()
         json_object = json.dumps(ret, indent=4)
         file.write(json_object)
@@ -40,12 +40,12 @@ try:
                 df.loc[source, "count"] = float(count)
                 df.loc[source, "label"] = label
         # Write DataFrame to CSV file
-        df.drop_duplicates(subset=['label'], inplace=True)
+        df.drop_duplicates(subset=["label"], inplace=True)
         df.to_csv(csv_file)
 
-    print(colored('Labels and counts added with success.✅', 'green'))
+    print(colored("Labels and counts added with success.✅", "green"))
 
 
 except Exception as e:
-    print(colored('An error occured generating the matrix.', 'red'))
+    print(colored("An error occured generating the matrix.", "red"))
     print(e)

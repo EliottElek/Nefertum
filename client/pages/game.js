@@ -92,7 +92,7 @@ const Game = () => {
               target="_blank"
               href={`https://www.reverso.net/traduction-texte#sl=eng&tl=fra&text=${question?.attribute?.toLowerCase()}`}
             >
-              See the translation of {question?.attribute.toLowerCase()} in
+              See the translation of {question?.attribute?.toLowerCase()} in
               french.
             </a>
           </Typography>

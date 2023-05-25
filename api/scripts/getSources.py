@@ -4,7 +4,7 @@ import json
 import os
 
 
-path = os.path.join("app/", "data")
+path = os.path.join("./", "data")
 json_file = os.path.join(path,  "data.json")
 
 

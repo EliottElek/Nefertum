@@ -25,13 +25,25 @@ def get_rand_question():
     return attribute[0][0]
 
 
-def get_next_question(current, radius):
-    random_point = numpy.random.randn(100)
-    # Normalize the random vector and scale it by a random radius
-    random_dist = random.uniform(0, radius)
-    random_point = current + random_dist * \
-        random_point / numpy.linalg.norm(random_point)
-    return emb.most_similar(random_point, topn=1)[0][0]
+def get_next_question(current, radius, used_attributes):
+    cond = False
+    quest = ""
+    while cond == False:
+        cond = True
+        random_point = numpy.random.randn(100)
+        # Normalize the random vector and scale it by a random radius
+        random_dist = random.uniform(0, radius)
+        random_point = current + random_dist * \
+            random_point / numpy.linalg.norm(random_point)
+        quest = emb.most_similar(random_point, topn=1)[0][0]
+        if get_label(quest)["xml:lang"] != "en":
+            cond = False
+        for attr in used_attributes:
+            if quest == attr:
+                cond = False
+        print(get_label(quest)["value"])
+        print(random_point)
+    return quest
 
 
 def get_next_position(answer, current_pos, attr_pos):
@@ -71,28 +83,30 @@ def getLikelyResultsEmb(session_id, attribute, answer):
         if answer != "Yes" and radius == 2:
             attr = get_rand_question()
             current_pos = emb.get_vector(attr)
-            get_label(attr)
+            get_label(attr)["value"]
             question = str("Can your smell be considered as " +
-                           str(get_label(attr)))
+                           str(get_label(attr)["value"]))
             nextQuestion = {"attribute": str(
-                get_label(attr)), "label": question + "?", "imageSupport": ""}
+                get_label(attr)["value"]), "label": question + "?", "imageSupport": ""}
             most_similar = emb.most_similar(current_pos, topn=10)
             labels = []
             for source in most_similar:
-                labels.append({"label": get_label(source[0])})
+                labels.append({"label": get_label(source[0])["value"]})
             return {"result": False, "sources": labels, "question": nextQuestion}
 
         while radius > 0.1:
             # http://data.odeuropa.eu/smell/82dffab9-dd1d-5e27-a3db-ff7f26cd9469
-            attr = get_next_question(current_pos, radius)
+            used_attributes = numpy.array(
+                model["used_attributes"]).tolist()
+
+            attr = get_next_question(current_pos, radius, used_attributes)
             question = str("Can your smell be considered as " +
                            # Expect something like "Can your smell be considered as sweet ?"
-                           str(get_label(attr)))
+                           str(get_label(attr)["value"]))
             current_pos = get_next_position(
                 answer, current_pos, emb.get_vector(attr))
             radius -= 0.2
-            used_attributes = numpy.array(
-                model["used_attributes"]).tolist()
+
             list = numpy.append(used_attributes, str(attr))
             new = {
                 "radius": radius,
@@ -103,17 +117,17 @@ def getLikelyResultsEmb(session_id, attribute, answer):
                 json.dump(new, jsonFile)
 
             nextQuestion = {"attribute": str(
-                get_label(attr)), "label": question + "?", "imageSupport": ""}
+                get_label(attr)["value"]), "label": question + "?", "imageSupport": ""}
 
             most_similar = emb.most_similar(current_pos, topn=10)
             labels = []
             for source in most_similar:
-                labels.append({"label": get_label(source[0])})
+                labels.append({"label": get_label(source[0])["value"]})
             return {"result": False, "sources": labels, "question": nextQuestion}
         most_similar = emb.most_similar(current_pos, topn=10)
         labels = []
         for source in most_similar:
-            labels.append({"label": get_label(source[0])})
+            labels.append({"label": get_label(source[0])["value"]})
         return {"result": True, "sources": labels}
 
 
@@ -135,11 +149,12 @@ def get_label(source):
     PREFIX crm: <http://erlangen-crm.org/current/>
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-    SELECT DISTINCT ?source ?label
+    SELECT DISTINCT ?source ?label ?scheme
     FROM <http://www.ontotext.com/disable-sameAs>
     WHERE {{
 	    VALUES ?source {{ {0} }}
-        ?source skos:prefLabel ?label
+        ?source skos:prefLabel ?label;
+        skos:inScheme ?scheme.
     }}
     """.format(string)
 
@@ -148,7 +163,8 @@ def get_label(source):
 
         ret = sparql.queryAndConvert()
         src = ret["results"]["bindings"]
-        return src[0]["label"]["value"]
+        print(src[0])
+        return src[0]["label"]
 
     except Exception as e:
         print(e)

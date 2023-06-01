@@ -148,7 +148,7 @@ class StartEmb(Resource):
         question = str("Can your smell be considered as " +
                        str(get_label(attr)))
         nextQuestion = {"attribute": str(
-            get_label(attr)), "label": question + "?", "imageSupport": ""}
+            get_label(attr)["value"]), "label": question + "?", "imageSupport": ""}
         return {"data": nextQuestion}, 200
 
 

@@ -12,6 +12,7 @@ lerna-debug.log*
 .env.local
 # exception to the rule
 !/api/data/.gitkeep
+!/api/data/model.json
 !/api/matrix/.gitkeep
 /.env.local/
 

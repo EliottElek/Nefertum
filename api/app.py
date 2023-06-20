@@ -5,9 +5,11 @@ from flask import Flask, request
 from flask_cors import CORS
 from flask_restful import Resource, Api
 import json
+import numpy as np
 
 from termcolor import colored
 from scripts.getLikelyResultsEmb import get_label
+from scripts.getLikelyResultsEmb import formulate_question
 from scripts.checkEmbedding import getAssociatedSources
 from scripts.getRandQuestion import getRandQuestion
 from scripts.getLikelyResults import getLikelyResults
@@ -145,10 +147,18 @@ class StartEmb(Resource):
         dst_path = os.path.join(pathModels, session_id + ".json")
         shutil.copy(src_path, dst_path)
         attr = get_rand_question()
-        question = str("Can your smell be considered as " +
-                       str(get_label(attr)))
-        nextQuestion = {"attribute": str(
-            get_label(attr)["value"]), "label": question + "?", "imageSupport": ""}
+        label = str(get_label(attr)["value"])
+        question = formulate_question(attr, label)
+        nextQuestion = {"attribute": label, "label": question + "?", "imageSupport": ""}
+        # Adding the first attribute to the used attributes
+        list = np.append([], str(attr))
+        new = {
+                "radius": 100,
+                "current_pos": 1,
+                "used_attributes": list.tolist()
+        }
+        with open(os.path.join(pathModels, session_id + ".json"), "w") as jsonFile:
+            json.dump(new, jsonFile)
         return {"data": nextQuestion}, 200
 
 

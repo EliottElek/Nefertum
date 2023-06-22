@@ -30,6 +30,7 @@ def get_rand_question():
         if count >= len(attributes):
             print('Error: no attributes in the start')
             print('table : ', attributes)
+            attr = get_rand_question()
             break
         url = attributes[count][0] # keeping only the URL and not the cosine similarity score
         if "vocabulary" in url :
@@ -103,7 +104,7 @@ def get_next_position(answer, current_pos, attr_pos):
     return next_pos
 
 
-def getLikelyResultsEmb(session_id, attribute, answer):
+def getLikelyResultsEmb(session_id, answer):
     session_model = os.path.join(pathModels, session_id + ".json")
     nextQuestion = {}
     with open(session_model) as outfile:
@@ -234,7 +235,7 @@ def formulate_question(attribute, label):
         "Can you describe your smell as ",
         "Does your smell make you feel ",
         "Can it be found in ",
-        "Do you smell it where you are "
+        "Do you smell it when you are "
     ]
     if "vocabulary/" in attribute :
         urlType = attribute.split("vocabulary/")[1].split("/")[0]

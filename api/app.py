@@ -117,7 +117,7 @@ class AnswerEmb(Resource):
             attribute = body["question"]["attribute"]
             answer = body["answer"]["label"]
         # return {"data": getNextQuestion(session_id)}, 200
-        return {"data": getLikelyResultsEmb(session_id, attribute, answer)}, 200
+        return {"data": getLikelyResultsEmb(session_id, answer)}, 200
 
 
 class Answers(Resource):
@@ -256,7 +256,7 @@ class LikelyResultsEmb(Resource):
                 attribute = latest_answer["question"]["attribute"]
                 answer = latest_answer["answer"]["label"]
 
-        return {"data": getLikelyResultsEmb(session_id, attribute, answer)}, 200
+        return {"data": getLikelyResultsEmb(session_id, answer)}, 200
 
 
 class AnswerJustifier(Resource):

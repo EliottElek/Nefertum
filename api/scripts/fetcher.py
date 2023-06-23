@@ -41,7 +41,7 @@ try:
                 if (key == "word_label"):
                     # Add attribute to source of attribute
                     # attr_list.append(str("Attr:"+value["value"]).lower())
-                    attr_list.append(str(value["value"]).lower())
+                    attr_list.append(str(value["value"]))
 
                     # Remove duplicates
         attr_list = list(dict.fromkeys(attr_list))

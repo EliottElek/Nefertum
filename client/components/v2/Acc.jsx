@@ -69,7 +69,7 @@ export default function Acc({ sessionId, question, results }) {
 
   const onGoodResult = async (index) => {
     try {
-      await supabase.from("games").insert({
+      await supabase.from("games2").insert({
         won: true,
         top_five: index <= 4 ? true : false,
       });
@@ -80,7 +80,7 @@ export default function Acc({ sessionId, question, results }) {
   };
   const onBadResult = async () => {
     try {
-      await supabase.from("games").insert({
+      await supabase.from("games2").insert({
         won: false,
       });
     } catch (e) {

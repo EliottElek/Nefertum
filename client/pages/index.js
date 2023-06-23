@@ -9,21 +9,8 @@ export default function Home() {
   const { setSessionId } = useAppContext();
   const [openStart, setOpenStart] = useState(false);
   const router = useRouter();
-  const [stats, setStats] = useState("__");
   setSessionId(null);
 
-  useEffect(() => {
-    const loadStats = async () => {
-      try {
-        const { data } = await supabase.from("games").select("won");
-        const wons = data.filter((d) => d.won);
-        setStats(Math.ceil((wons.length / data.length) * 100));
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    loadStats();
-  }, [setStats]);
   return (
     <div className="h-full">
       <Head>

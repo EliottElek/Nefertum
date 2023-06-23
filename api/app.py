@@ -149,13 +149,14 @@ class StartEmb(Resource):
         attr = get_rand_question()
         label = str(get_label(attr)["value"])
         question = formulate_question(attr, label)
-        nextQuestion = {"attribute": label, "label": question + "?", "imageSupport": ""}
+        nextQuestion = {"attribute": label,
+                        "label": question + "?", "imageSupport": ""}
         # Adding the first attribute to the used attributes
         list = np.append([], str(attr))
         new = {
-                "radius": 100,
-                "current_pos": 1,
-                "used_attributes": list.tolist()
+            "radius": 100,
+            "current_pos": 1,
+            "used_attributes": list.tolist()
         }
         with open(os.path.join(pathModels, session_id + ".json"), "w") as jsonFile:
             json.dump(new, jsonFile)
@@ -304,13 +305,16 @@ class AnswerJustifier(Resource):
 
 
 api.add_resource(Questions, "/questions")
-api.add_resource(StartEmb, "/start/<session_id>")
-api.add_resource(AnswerEmb, "/answer/<session_id>")
+api.add_resource(StartEmb, "/startEmb/<session_id>")
+api.add_resource(Start, "/start/<session_id>")
+api.add_resource(Answer, "/answer/<session_id>")
+api.add_resource(AnswerEmb, "/answerEmb/<session_id>")
 api.add_resource(Answers, "/answers/<session_id>")
 api.add_resource(Sources, "/sources")
 api.add_resource(Attributes, "/attributes")
 api.add_resource(ClearMatrixes, "/clear-matrixes")
-api.add_resource(LikelyResultsEmb, "/likely_results/<session_id>")
+api.add_resource(LikelyResultsEmb, "/likely_resultsEmb/<session_id>")
+api.add_resource(LikelyResults, "/likely_results/<session_id>")
 api.add_resource(AnswerJustifier, "/answer_justifier/<session_id>")
 api.add_resource(Embeddings, "/embeddings")
 

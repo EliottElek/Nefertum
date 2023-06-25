@@ -57,7 +57,7 @@ def makeRequest(sources, sourcesOnly):
 
 
 def getAssociatedSources(source_id, topn, sourcesOnly):
-    path = os.path.join("./", "data")
+    path = os.path.join("./app", "data")
     emb_path = os.path.join(path, 'voc_emb.kv')
 
     emb = KeyedVectors.load(emb_path)

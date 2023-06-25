@@ -11,9 +11,9 @@ sparql = SPARQLWrapper(
 )
 sparql.setReturnFormat(JSON)
 
-path = os.path.join("./", "data")
+path = os.path.join("./app", "data")
 emb_path = os.path.join(path, 'voc.kv')
-pathModels = os.path.join("./", "models")
+pathModels = os.path.join("./app", "models")
 
 emb = KeyedVectors.load(emb_path)
 

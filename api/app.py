@@ -26,9 +26,9 @@ app.config["CORS_HEADERS"] = "Content-Type"
 api = Api(app)
 app.config["SECRET_KEY"] = "oh_so_secret"
 
-path = os.path.join("./", "data")
-pathMatrix = os.path.join("./", "matrixes")
-pathModels = os.path.join("./", "models")
+path = os.path.join("./app", "data")
+pathMatrix = os.path.join("./app", "matrixes")
+pathModels = os.path.join("./app", "models")
 
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "data.json")
@@ -201,7 +201,7 @@ class Embeddings(Resource):
 
 class ClearMatrixes(Resource):
     def post(self):
-        path = os.path.join("./", "matrixes")
+        path = os.path.join("./app", "matrixes")
 
         filelist = glob.glob(os.path.join(path, "*.csv"))
         if (len(filelist) == 0):

@@ -16,7 +16,7 @@ sparql.setQuery(attributesQuery)
 attr_list = ["Sources/Attributes", "label", "score", "count"]
 source_list = []
 
-path = os.path.join("./", "data")
+path = os.path.join("./app", "data")
 csv_file = os.path.join(path, "matrix.csv")
 json_file = os.path.join(path,  "data.json")
 print("Generating matrix from odeuropa endpoint...")

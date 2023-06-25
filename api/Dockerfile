@@ -1,10 +1,10 @@
 FROM python:3.12.0a4-bullseye
 WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
-RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
-RUN pip3 install numpy --upgrade
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install numpy --upgrade
 COPY . /code/app
-CMD python3 app/matrixes/clearMatrixes.py && python3 app/scripts/fetcher.py && python3 app/scripts/addCountsLabels.py && python3 app/scripts/generateAttributesQuestions.py
+CMD python app/matrixes/clearMatrixes.py && python app/scripts/fetcher.py && python app/scripts/addCountsLabels.py && python app/scripts/generateAttributesQuestions.py
 CMD env FLASK_APP=app/app.py
 CMD cd code
 CMD cd app

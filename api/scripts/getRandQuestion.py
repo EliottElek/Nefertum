@@ -2,7 +2,7 @@ import json
 import os
 import random
 
-path = os.path.join("./", "data")
+path = os.path.join("./app", "data")
 json_file = os.path.join(path, "questions.json")
 
 

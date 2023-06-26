@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 export default function Home() {
   const { setSessionId } = useAppContext();
   const [openStart, setOpenStart] = useState(false);
+  const [version, setVersion] = useState("matrix");
+
   const router = useRouter();
   setSessionId(null);
 
@@ -33,11 +35,28 @@ export default function Home() {
             learning)
           </h3>
         )} */}
-        <button onClick={() => setOpenStart(true)}>
-          <span className="button px-10 py-4 border cursor-pointer rounded-full my-10">
-            Start a game
-          </span>
-        </button>
+        <div className="grid grid-cols-2 w-full justify-center gap-5">
+          <button
+            onClick={() => {
+              setVersion("matrix");
+              setOpenStart(true);
+            }}
+          >
+            <span className="button w-full px-10 py-4 border cursor-pointer rounded-full ">
+              Start (matrix)
+            </span>
+          </button>
+          <button
+            onClick={() => {
+              setVersion("embeddings");
+              setOpenStart(true);
+            }}
+          >
+            <span className="button w-full px-10 py-4 border cursor-pointer rounded-full">
+              Start (embeddings)
+            </span>
+          </button>
+        </div>
       </div>
       <CustomModal
         submitBtnLabel={"Ready !"}
@@ -45,7 +64,11 @@ export default function Home() {
         title={"Think about a smell..."}
         open={openStart}
         setOpen={setOpenStart}
-        onSubmit={() => router.push("/game")}
+        onSubmit={() =>
+          version === "embeddings"
+            ? router.push("/v2/game")
+            : router.push("/game")
+        }
       >
         <div className="flex flex-col items-start !font-sans font-bold">
           Close your eyes and think of a smell. It can be anything, from your

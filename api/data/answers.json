@@ -1,1 +1,16 @@
-{ "session_id": "initial", "answers": [] }
+[
+  { "session_id": "initial", "answers": [] },
+  {
+    "session_id": "305f323a-5d70-4e15-a24c-5a79d2ebd5cf",
+    "answers": [
+      {
+        "question": {
+          "attribute": "Lavender",
+          "label": "Can your smell be considered as lavender ?",
+          "imageSupport": ""
+        },
+        "answer": { "label": "Yes", "weight": 1 }
+      }
+    ]
+  }
+]

@@ -1,6 +1,7 @@
-FROM python:3.12.0a4-bullseye
+FROM python
 WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 RUN pip install numpy --upgrade
 COPY . /code/app

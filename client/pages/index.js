@@ -35,24 +35,26 @@ export default function Home() {
             learning)
           </h3>
         )} */}
-        <div className="grid grid-cols-2 w-full justify-center gap-5">
+        <div className="grid grid-cols-2 m-auto gap-5">
           <button
+            className="w-full"
             onClick={() => {
               setVersion("matrix");
               setOpenStart(true);
             }}
           >
-            <span className="button w-full px-10 py-4 border cursor-pointer rounded-full ">
+            <span className="button w-full py-4 border cursor-pointer rounded-full ">
               Start (matrix)
             </span>
           </button>
           <button
+            className="w-full"
             onClick={() => {
               setVersion("embeddings");
               setOpenStart(true);
             }}
           >
-            <span className="button w-full px-10 py-4 border cursor-pointer rounded-full">
+            <span className="button w-full py-4 border cursor-pointer rounded-full">
               Start (embeddings)
             </span>
           </button>

@@ -146,7 +146,7 @@ export default function Acc({ sessionId, question, results }) {
         onSubmit={onBadResult}
       >
         <div className="flex flex-col items-start">
-          From our calculations, you smell would be...
+          From our calculations, your smell would be...
           <Typography variant="h4" className="pt-5 text-gray-700">
             {results?.sources[0]?.label}
           </Typography>
@@ -157,7 +157,7 @@ export default function Acc({ sessionId, question, results }) {
           >
             See the translation of {results?.sources[0]?.label} in french.
           </a>
-          <h3>Is you smell in the list ? Pleave click on it if yes.</h3>
+          <h3>Is your smell in the list ? Please click on it if yes.</h3>
           {results?.sources && (
             <List className="w-full">
               {results?.sources.map((s, i) => (

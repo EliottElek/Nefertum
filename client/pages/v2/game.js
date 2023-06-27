@@ -4,7 +4,7 @@ import { Button } from "@material-tailwind/react";
 import { ResponsesDisplay } from "../../data";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import Acc from "../../components/Acc";
+import Acc from "../../components/v2/Acc";
 import { Typography } from "@material-tailwind/react";
 import { useAppContext } from "../../context";
 import Head from "next/head";

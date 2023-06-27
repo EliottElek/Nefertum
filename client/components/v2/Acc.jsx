@@ -8,11 +8,11 @@ import {
   ListItem,
   List,
 } from "@material-tailwind/react";
-import { supabase } from "../lib/supabase";
-import CustomModal from "./Modal";
+import { supabase } from "../../lib/supabase";
+import CustomModal from "../Modal";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import { renderBoldStrings } from "../lib/boldString";
+import { renderBoldStrings } from "../../lib/boldString";
 export default function Acc({ sessionId, question, results }) {
   const [open, setOpen] = useState(0);
   const [contextAnswer, setContextAnswer] = useState(null);

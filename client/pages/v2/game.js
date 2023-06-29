@@ -47,6 +47,7 @@ const Game = () => {
         const { data } = await axios.get(
           `${process.env.NEXT_PUBLIC_API_ENDPOINT}/startEmb/${id}`
         );
+        console.log(data);
         setQuestion(data.data);
         setLoading(false);
       } catch (err) {

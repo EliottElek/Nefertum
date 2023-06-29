@@ -147,6 +147,7 @@ class StartEmb(Resource):
         dst_path = os.path.join(pathModels, session_id + ".json")
         shutil.copy(src_path, dst_path)
         attr = get_rand_question()
+        print("*************************")
         label = str(get_label(attr)["value"])
         question = formulate_question(attr, label)
         nextQuestion = {"attribute": label,
@@ -160,6 +161,7 @@ class StartEmb(Resource):
         }
         with open(os.path.join(pathModels, session_id + ".json"), "w") as jsonFile:
             json.dump(new, jsonFile)
+        print(nextQuestion)
         return {"data": nextQuestion}, 200
 
 

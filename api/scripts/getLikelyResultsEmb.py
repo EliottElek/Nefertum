@@ -22,22 +22,26 @@ def get_rand_question():
     # Random vector selection
     rand = emb.vectors[random.randint(0, len(emb.vectors)-1)]
     attributes = emb.most_similar(rand, topn=100)
+
     cond = False
     count = 0
     attr = ""
     invalid_urlTypes = {"olfactory-objects", "noses"}
-    while cond == False :
+    while cond == False:
         if count >= len(attributes):
             print('Error: no attributes in the start')
             print('table : ', attributes)
             attr = get_rand_question()
             break
-        url = attributes[count][0] # keeping only the URL and not the cosine similarity score
-        if "vocabulary" in url :
-            urlType = url.split("vocabulary/")[1].split("/")[0] # parsing the URI to retrieve only what is after the type of the object
-            if urlType not in invalid_urlTypes and "odorants" not in url :
+        # keeping only the URL and not the cosine similarity score
+        url = attributes[count][0]
+        if "vocabulary" in url:
+            # parsing the URI to retrieve only what is after the type of the object
+            urlType = url.split("vocabulary/")[1].split("/")[0]
+            if urlType not in invalid_urlTypes and "odorants" not in url:
                 cond = True
-                attr = url # returning the valid attribute to ask the first question(s)
+                # returning the valid attribute to ask the first question(s)
+                attr = url
         count += 1
     return attr
 
@@ -48,24 +52,25 @@ def get_next_question(current, radius, used_attributes):
     print('radius', radius)
 
     most_similar = emb.most_similar(current, topn=30)
-    
+
     # Removing all the attributes that are not in the radius and keeping only qualities
     inside_attr = []
     invalid_urlTypes = {"olfactory-objects", "noses"}
     for el in most_similar:
         url = el[0]
-        if "vocabulary/" in url :
+        if "vocabulary/" in url:
             urlType = url.split("vocabulary/")[1].split("/")[0]
-                
+
             # OPTION 1
             if urlType not in invalid_urlTypes and "odorants" not in url:
-                if np.linalg.norm(emb.get_vector(url) - current) < radius :
+                if np.linalg.norm(emb.get_vector(url) - current) < radius:
                     inside_attr.append(url)
                 else:
-                    print('unvalid distance : ', np.linalg.norm(emb.get_vector(url) - current))
+                    print('unvalid distance : ', np.linalg.norm(
+                        emb.get_vector(url) - current))
                     print('radius : ', radius)
                     break
-        else :
+        else:
             print('Error URI')
 
     # Deleting all the attributes have been used already
@@ -76,7 +81,7 @@ def get_next_question(current, radius, used_attributes):
 
     # Selecting a random attribute between the ones we have left
     quest = "**no_attr_left**"
-    if len(attributes_left)!=0:
+    if len(attributes_left) != 0:
         quest = np.random.choice(attributes_left)
     return quest
 
@@ -134,7 +139,8 @@ def getLikelyResultsEmb(session_id, answer):
                 json.dump(new, jsonFile)
             label = str(get_label(attr)["value"])
             question = formulate_question(attr, label)
-            nextQuestion = {"attribute": label, "label": question + "?", "imageSupport": ""}
+            nextQuestion = {"attribute": label,
+                            "label": question + "?", "imageSupport": ""}
             most_similar = emb.most_similar(current_pos, topn=10)
             labels = []
             for source in most_similar:
@@ -148,7 +154,8 @@ def getLikelyResultsEmb(session_id, answer):
 
             attr = get_next_question(current_pos, radius, used_attributes)
             label = str(get_label(attr)["value"])
-            question = formulate_question(attr, label) # Expect something like "Can your smell be considered as sweet ?"
+            # Expect something like "Can your smell be considered as sweet ?"
+            question = formulate_question(attr, label)
             current_pos = get_next_position(
                 answer, current_pos, emb.get_vector(attr))
             radius -= 5
@@ -162,25 +169,27 @@ def getLikelyResultsEmb(session_id, answer):
             with open(os.path.join(pathModels, session_id + ".json"), "w") as jsonFile:
                 json.dump(new, jsonFile)
 
-            nextQuestion = {"attribute": label, "label": question + "?", "imageSupport": ""}
+            nextQuestion = {"attribute": label,
+                            "label": question + "?", "imageSupport": ""}
 
             most_similar = emb.most_similar(current_pos, topn=10)
             labels = []
             for source in most_similar:
                 labels.append({"label": get_label(source[0])["value"]})
             return {"result": False, "sources": labels, "question": nextQuestion}
-        
+
         # Finding the 10 most appropriate sources
-        most_similar = emb.most_similar(current_pos, topn=500) # The 500 is not optimal but allows to ensure to have 10 final sources.
+        # The 500 is not optimal but allows to ensure to have 10 final sources.
+        most_similar = emb.most_similar(current_pos, topn=500)
         sources = []
         for el in most_similar:
-            if "vocabulary/" in el[0] :
+            if "vocabulary/" in el[0]:
                 urlType = el[0].split("vocabulary/")[1].split("/")[0]
-                if urlType == "olfactory-objects" :
+                if urlType == "olfactory-objects":
                     sources.append(el[0])
-            else :
+            else:
                 print('Error URI')
-            
+
         sources = sources[:10]
         labels = []
         for source in sources:
@@ -197,9 +206,9 @@ def translate_towards(target, initial, distance):
 
 
 def get_label(source):
-    if source == "**no_attr_left**" :
-        return {"value" : source}
-    else :
+    if source == "**no_attr_left**":
+        return {"value": source}
+    else:
         string = ""
         string = string + "<" + source + ">"
         string = string.replace("\n", " ")
@@ -229,6 +238,7 @@ def get_label(source):
         except Exception as e:
             print(e)
 
+
 def formulate_question(attribute, label):
     quest = ""
     templates = [
@@ -237,7 +247,7 @@ def formulate_question(attribute, label):
         "Can it be found in ",
         "Do you smell it when you are "
     ]
-    if "vocabulary/" in attribute :
+    if "vocabulary/" in attribute:
         urlType = attribute.split("vocabulary/")[1].split("/")[0]
         match urlType:
             case "plutchik":

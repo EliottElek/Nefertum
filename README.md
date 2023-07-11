@@ -16,6 +16,8 @@ Akinator like guesser for smells.
     * `NEXT_PUBLIC_SUPABASE_URL` - URL to the Supabase database
     * `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anon
 
+1. Download the [smell embeddings](https://data.odeuropa.eu/image/smell_embeddings/voc.kv) and copy them into the `api/data` directory.
+
 1. Run the following command:
 
     ```bash
